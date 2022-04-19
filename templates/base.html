@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+<head>
+  <META HTTP-EQUIV="content-type" CONTENT="text/html; charset=ISO-8859-2">
+  <META HTTP-EQUIV="content-language" CONTENT="pl">
+   <link rel="stylesheet" type="text/css" href="{% static "css/menu_style.css" %}" />
+</head>
+    <body>
+<style>
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #091c44;
+  color: white;
+  text-align: center;
+}
+</style>
+    <center>
+
+
+    <div style="background-color: #091C44">
+   <img src="{% static "img/up_img.png" %}" alt="Logo"/>
+    </div></center>
+
+<div id="outside">
+<ul id="navigation-1">
+   <li><a href="" title="Pojazdy" target="flota" >Pojazdy</a>
+      <ul class="navigation-2">
+         <li><a href="/add_vehicle/" title="Dodaj" target="flota" >Dodaj</a></li>
+         <li><a href="/search/" title="Wyszukaj" target="flota" >Wyszukaj</a></li>
+         <li><a href="/edit/" title="Edytuj" target="flota" >Edytuj</a></li>
+         <li><a href="/del/" title="Usu&#324;" target="flota">Usu&#324;</a></li>
+
+      </ul>
+   </li>
+    <li><a href="" title="Zestawienia" target="flota" >Zestawienia</a>
+      <ul class="navigation-2">
+         <li><a href="/wykaz_pojazdow/0/" title="Wszystkie pojazdy" target="flota" >Wszystkie pojazdy</a></li>
+         <li><a href="/wykaz_pojazdow/1/" title="Samochody" target="flota" >Samochody</a></li>
+         <li><a href="/wykaz_pojazdow/2/" title="trailers" target="flota" >Przyczepy i naczepy</a></li>
+         <li><a href="/drivers/" title="drivers" target="flota" >Kierowcy</a></li>
+      </ul>
+   </li>
+   <li><a href="" title="Terminy" target="flota" >Terminy</a>
+      <ul class="navigation-2">
+         <li><a href="/dedlineveh/" title="Terminy pojazdy" target="flota" >Terminy pojazdy</a></li>
+        <li><a href="/dedlineperson/" title="Terminy kierowcy" target="flota" >Terminy kierowcy</a></li>
+      </ul>
+   </li>
+   <li><a href="" title="Kartoteki" target="flota" >Kartoteki</a>
+      <ul class="navigation-2">
+         <li><a href="/details/" title="Kartoteka pojazdu" target="flota" >Kartoteka pojazdu</a></li>
+         <li><a href="/detailsofdriver/" title="Kartoteka kierowcy" target="flota" >Kartoteka kierowcy</a></li>
+      </ul>
+   </li>
+   <li><a href="" title="Kierowcy" target="flota" >Kierowcy</a>
+      <ul class="navigation-2">
+         <li><a href="/drivers/" title="Zestawienie" target="flota" >Zestawienie</a></li>
+         <li><a href="/adddriver/" title="Dodaj" target="flota" >Dodaj</a></li>
+         <li><a href="/editdriver/" title="Edytuj" target="flota" >Edytuj</a></li>
+          <li><a href="/deletedriver/" title="Usu&#324;" target="flota" >Usu&#324;</a></li>
+          <li><a href="/searchperson/" title="Wyszukaj" target="flota" >Wyszukaj</a></li>
+          </ul>
+   </li>
+<li><a href="" title="Pomoc" target="flota" >Pomoc</a>
+      <ul class="navigation-2">
+         <li><a href="/help/" title="Instrukcja" target="flota" >Instrukcja</a></li>
+         <li><a href="/about/" title="O programie" target="flota" >O programie</a></li>
+      </ul>
+   </li>
+               <li><a href="" title="Wyj&#347;cie" target="flota" >Wyj&#347;cie</a>
+      <ul class="navigation-2">
+         <li><a href="/admin/" title="CMS" target="_TOP" >Panel admin CMS</a></li>
+          <li><a href="/logout/" title="Wyloguj" target="_TOP" >Wyloguj</a></li>
+              </ul>
+
+                   <li><a href=""  target="flota" >Zalogowany jako: {{ user }}</a>
+
+              </ul>
+   </li> </ul>
+</div>
+{% block content %}
+{% endblock %}
+
+<footer class="footer">
+    <center>Autor: Przemys&#322;aw Maniecki 2020&copy;</center></footer>
+</body>
+</html>

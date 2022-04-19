@@ -1,0 +1,11 @@
+.data {
+        width: 40%;
+        height: 699px;
+        float: left;
+	background-color: white;
+}
+.graphics {
+    width: 60%;
+    height: 200px;
+    float: right;
+    }
