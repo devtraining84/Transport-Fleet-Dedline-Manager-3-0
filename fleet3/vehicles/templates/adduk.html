@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h4>Aktualizacja polisy komunikacyjnej</h4>
+    Pojazd: {{ unit }}<br>
+    <form action="" method="post">
+    {% csrf_token %}
+    Ubezpieczyciel:{{ form.instytucja }} &nbsp;nr polisy: {{ form.nr_polisy }}<br>
+    Data zakończenia umowy: {{ form.data_konc }}<br>Zakres:&nbsp;
+        OC:{{ form.OC}}&nbsp;AC:{{ form.AC }}&nbsp;NNW:{{ form.NNW }}
+        <input type="submit" value="Aktualizuj">
+    </form>
+
+{% endblock %}
+
+

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h4>Aktualizacja dopuszczenia ADR pojazdu</h4>
+    Pojazd: {{ unit }}<br>
+    <form action="" method="post">
+    {% csrf_token %}
+        {{ form }}
+    <input type="submit" value="Aktualizuj">
+    </form>
+
+{% endblock %}
+
+

@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<head>
+<link rel="stylesheet" type="text/css" href="{% static "css/style_details.css" %}">
+
+</head>
+    <b>
+    <div class="data">
+
+<h3>Szczegóły pojazdu</h3>
+
+        {% for i in unit %}
+Pojazd {{ i.rodzaj }} marka i model: {{ i.marka }}&nbsp;{{ i.model }}, rok produkcji: {{ i.rok_prod }}<br>
+nr rejestracyjny pojazdu: {{ i.nr_rej }},&nbsp;VIN: &nbsp;{{ i.VIN }},&nbsp; indeks w bazie danych: {{ i.pk }}<br>
+<hr size="1">
+<h4>Przegląd techniczny</h4>
+
+{{ i.przegladtech.nazwa }} &nbsp; Wydany przez: {{ i.przegladtech.instytucja }}<br>
+Wymagany: {% if i.przegladtech.wymagane %}Tak
+          {% else %} Nie
+          {% endif %}
+       <br> Data ważności przeglądu:<b><font color="red">
+            {% if i.przegladtech.data_konc %}{{ i.przegladtech.data_konc.isoformat}}
+            {% else %}Brak w systemie
+            {% endif %}</b> </font>       <br>
+        Czas do końca: {{i.przegladtech.data_konc|timeuntil:today }}
+        <a href="/addbt/{{ i.pk }}">AKTUALIZUJ </a>
+<hr size="1">
+    <h4>Przegląd tachografu</h4>
+{{ i.przegladtacho.nazwa }} &nbsp; Wydany przez:{{ i.przegladtacho.instytucja }}<br>
+Wymagany: {% if i.przegladtacho.wymagane %}Tak
+          {% else %} Nie
+          {% endif %}
+       <br> Data ważności przeglądu:<b><font color="red">
+            {% if i.przegladtacho.data_konc %}{{ i.przegladtacho.data_konc.isoformat}}
+            {% else %}Brak w systemie
+            {% endif %}</b></font>            <br>
+        Czas do końca: {{i.przegladtacho.data_konc|timeuntil:today }}
+        <a href="/addtacho/{{ i.pk }}">AKTUALIZUJ </a>
+<hr size="1">
+    <h4>Ubezpieczenie komunikacyjne</h4>
+{# tu wstawisz UK #}
+Ubezpieczyciel: {{ i.komunikacyjne.instytucja }} nr polisy:{% if i.komunikacyjne.nr_polisy %} {{ i.komunikacyjne.nr_polisy }} {% else  %}BRAK {% endif %}<br>
+Pakiet:&nbsp;{% if i.komunikacyjne.OC %} OC &nbsp;{% endif %}
+            &nbsp;{% if i.komunikacyjne.AC %} AC &nbsp;{% endif %}
+            &nbsp;{% if i.komunikacyjne.NNW %} NNW &nbsp;{% endif %}
+data końca umowy: {{ i.komunikacyjne.data_konc }}<br>
+Czas do końca: {{i.komunikacyjne.data_konc|timeuntil:today }}
+<a href="/adduk/{{ i.pk }}">AKTUALIZUJ </a>
+<hr size="1">
+<h4>Dopuszczenie ADR</h4>
+{{ i.przegladadr.nazwa }} &nbsp; Wydany przez:{{ i.przegladadr.instytucja }}<br>
+Wymagany: {% if i.przegladadr.wymagane %}Tak
+          {% else %} Nie
+          {% endif %}
+       <br> Data ważności przeglądu:<b><font color="red">
+            {% if i.przegladadr.data_konc %}{{ i.przegladadr.data_konc.isoformat}}
+            {% else %}Brak w systemie
+            {% endif %}</b></font>            <br>
+        Czas do końca: {{i.przegladtacho.data_konc|timeuntil:today }}
+        <a href="/addadr/{{ i.pk }}">AKTUALIZUJ </a>
+
+
+<hr size="1">
+    <h4>Badania UDT</h4>
+{{ i.przegladudt.nazwa }} &nbsp; Wydany przez:{{ i.przegladudt.instytucja }}<br>
+Wymagany: {% if i.przegladudt.wymagane %}Tak
+          {% else %} Nie
+          {% endif %}
+       <br> Data ważności przeglądu:<b><font color="red">
+            {% if i.przegladudt.data_konc %}{{ i.przegladudt.data_konc.isoformat}}
+            {% else %}Brak w systemie
+            {% endif %}</b></font>            <br>
+        Czas do końca: {{i.przegladudt.data_konc|timeuntil:today }}
+        <a href="/addudt/{{ i.pk }}">AKTUALIZUJ </a>
+<hr size="1">
+    <h4>Certyfikat FRC</h4>
+{{ i.przegladfrc.nazwa }} &nbsp; Wydany przez:{{ i.przegladfrc.instytucja }}<br>
+Wymagany: {% if i.przegladfrc.wymagane %}Tak
+          {% else %} Nie
+          {% endif %}
+       <br> Data ważności certyfikatu:<b><font color="red">
+            {% if i.przegladfrc.data_konc %}{{ i.przegladfrc.data_konc.isoformat}}
+            {% else %}Brak w systemie
+            {% endif %}</b></font>            <br>
+        Czas do końca: {{i.przegladfrc.data_konc|timeuntil:today }}
+        <a href="/addfrc/{{ i.pk }}">AKTUALIZUJ </a><hr size="1">
+  <h4>Badania TDT</h4>
+{{ i.przegladtdt.nazwa }} &nbsp; Wydany przez:{{ i.przegladtdt.instytucja }}<br>
+Wymagany: {% if i.przegladtdt.wymagane %}Tak
+          {% else %} Nie
+        {% endif %}
+       <br> Data ważności przeglądu:<b><font color="red">
+            {% if i.przegladtdt.data_konc %}{{ i.przegladtdt.data_konc.isoformat}}
+            {% else %}Brak w systemie
+            {% endif %}</b>
+            </font>            <br>
+        Czas do końca: {{i.przegladtdt.data_konc|timeuntil:today }}
+        <a href="/addtdt/{{ i.pk }}">AKTUALIZUJ </a>
+
+<hr size="1">
+            <h4>Norma czystości spalin {{ i.normaeuro.norma }}</h4>
+            {% if i.normaeuro.wymagane %} 
+            {% else %}Nie dotyczy
+            {% endif %}<br>
+            <a href="/addeuro/{{ i.pk }}">AKTUALIZUJ </a><br>
+            <font size="4" color="blue"><b>
+
+            </b></font><br>
+
+
+{% endfor %}
+   </div>
+    <div class="graphics">
+<img src="{% static "img/trailer.png" %}" alt="background">
+    </div>
+  </body>
+
+{% endblock %}

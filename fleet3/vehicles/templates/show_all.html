@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <h4>Wykaz pojazów ze szczegółami:  {{ note }}</h4>
+<form action="/search/" method="get" id="button2" style="visibility: hidden;">
+<input type="submit" value="Wyszukiwarka">
+</form>
+<form action="" method="get">
+    {{ form }}
+<input type="submit" value="szukaj" id="button" style="visibility: visible">
+    </form>
+<table border="8">
+<thead>
+<tr style="background-color: cadetblue">
+<th>id</th>
+<th>Rodzaj</th>
+<th>Marka</th>
+<th>Model</th>
+<th>VIN</th>
+<th>nr rej.</th>
+<th>rok produkcji</th>
+<th>przegląd data</th>
+<th>przegląd tachografu</th>
+<th>norma Euro</th>
+<th>przegląd UDT</th>
+<th>przegląd TDT</th>
+<th>przegląd ADR</th>
+<th>chłodnia FRC</th>
+<th>ubezpieczenie kom.</th>
+    <th colspan="3"></th>
+
+</tr>
+</thead>
+{% for i in pojazdy %}
+<tr class="rows" style="background-color: white" >
+    <td><center>{{ i.id }}</td>
+    <td><center>{{ i.rodzaj }}</td>
+    <td><center>{{ i.marka }}</td>
+    <td><center>{{ i.model }}</td>
+    <td><center>{{ i.VIN }}</td>
+    <td><center>{{ i.nr_rej }}</td>
+    <td><center>{{ i.rok_prod }}</td>
+    <td><center>{{ i.przegladtech.data_konc }}</td>
+    <td><center>{{ i.przegladtacho.data_konc }}</td>
+    <td><center>{{ i.normaeuro.norma }}</td>
+    <td><center>{{ i.przegladtdt.data_konc }}</td>
+    <td><center>{{ i.przegladtdt.data_konc }}</td>
+    <td><center>{{ i.przegladadr.data_konc }}</center></td>
+    <td><center>{{ i.przegladfrc.data_konc }}</td>
+    <td><center>{{ i.komunikacyjne.data_konc }}</td>
+
+        <td class="functional"><b><center>
+        <a href="/details/{{ i.pk }}"/>
+        <font size="4" color="black"></u>Szczegóły</td>
+
+        <td class="functional"><b><center>
+        <a href="/edit/{{ i.nr_rej }}/">
+        <font size="4" color="black">Edytuj</td>
+
+    <td class="functional"><b><center>
+        <a href="/delete/{{ i.id }}" onclick="return confirm('Czy na pewno chcesz usunąć?')">
+            <font size="4" color="red">Usuń</td>
+</tr>
+{% endfor %}
+</table>
+
+<script src="{% static "js/app.js" %}"></script>
+
+{% endblock %}
+
+
