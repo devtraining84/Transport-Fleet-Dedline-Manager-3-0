@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+ <head>
+ <link rel="stylesheet" type="text/css" href="{% static "css/style_details.css" %}">
+ </head>
+<div class = "data">
+    <font size="6">
+    <h3><img src="{% static "img/kogut2.gif"%}">Uwaga<img src="{% static "img/kogut2.gif"%}"></h3>
+  <ul>
+  <li>OCP - Odpowiedzialność cywilna przewoźnika,</li>
+  <li>Ubezpieczenie kabotażowe,</li>
+  <li>DAS - ochrona prawna</li>
+  </ul>
+Są wystawione do licencji przewoźnika z aneksem których pojazdów dotyczą - nie do każdego pojazdu
+    osobna umowa.
+    </font></div>
+    <div class="graphics">
+<img src="{% static "img/smalltrailer2.png" %}" alt="background">
+    </div>
+{% endblock %}
+
+
