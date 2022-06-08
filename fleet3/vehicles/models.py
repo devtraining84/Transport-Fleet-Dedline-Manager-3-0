@@ -64,7 +64,12 @@ class ADR(models.Model):
     data_konc = models.DateField(blank=True, null=True)
     pojazd = models.OneToOneField(VehiclesModel, on_delete=models.CASCADE, primary_key=True, related_name='przegladadr')
     def __str__(self):
-        return self.pojazd.nr_rej        
+        return self.pojazd.nr_rej   
+
+class NormaCzystosciSpalin(models.Model):
+    norma = models.CharField(max_length=12, choices=EURO, default="nie dotyczy", null=True)
+    wymagane = models.BooleanField(default=False)
+    pojazd = models.OneToOneField(VehiclesModel, on_delete=models.CASCADE, primary_key=True , related_name='normaeuro')             
 
 
 
