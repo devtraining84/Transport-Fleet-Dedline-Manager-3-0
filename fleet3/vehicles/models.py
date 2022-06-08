@@ -3,7 +3,6 @@ from django.core.exceptions import ValidationError
 from vehicles.choice import *
 from django.core.exceptions import ValidationError
 
-#from vehicles.validatorss import *
 
 
 # Create your models here.

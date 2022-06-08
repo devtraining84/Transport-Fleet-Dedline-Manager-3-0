@@ -7,10 +7,7 @@ from vehicles.models import VehiclesModel
 
 
 
-
-class AddVehicleForm(forms.ModelForm):
+class vehicle_form(forms.ModelForm):
     class Meta:
         model = VehiclesModel
         fields = ('rodzaj', 'marka', 'model', 'VIN', 'nr_rej', 'rok_prod')
-
-

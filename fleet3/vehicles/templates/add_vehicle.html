@@ -10,7 +10,15 @@
 
 <input type="reset" value="Wyczyść">&nbsp
 <input type="submit" value="      Dodaj    ">
-        <br>{{ info }}
+        <br>
 </form>
+{% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" style="padding-top:80px">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif  %}
+
 {% endblock %}
 
