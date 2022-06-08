@@ -48,4 +48,14 @@ class BT(models.Model):
     def __str__(self):
         return self.pojazd.nr_rej
 
+class tacho(models.Model):
+    nazwa = models.CharField(max_length=60, default="Przegląd tachografu")
+    instytucja = models.CharField(default="Okręgowa Stacja Kontroli Pojazdów", max_length=40)
+    wymagane = models.BooleanField(default=False)
+    data_konc = models.DateField(blank=True, null=True)
+    pojazd = models.OneToOneField(VehiclesModel, on_delete=models.CASCADE, related_name='przegladtacho')
+    def __str__(self):
+        return self.pojazd.nr_rej
+
+
 
