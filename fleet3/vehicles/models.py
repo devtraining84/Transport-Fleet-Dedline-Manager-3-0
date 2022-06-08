@@ -81,5 +81,13 @@ class FRC(models.Model):
     def __str__(self):
         return self.pojazd.nr_rej                 
 
+class UDT(models.Model):
+    nazwa = models.CharField(max_length=60, default="Badanie dopuszczenia windy hydraulicznej lub HDS")
+    instytucja = models.CharField(default="Urząd Dozoru Techniczego", max_length=40)
+    wymagane = models.BooleanField(default=False)
+    data_konc = models.DateField(blank=True, null=True)
+    pojazd = models.OneToOneField(VehiclesModel, on_delete=models.CASCADE, primary_key=True, related_name='przegladudt')
+    def __str__(self):
+        return self.pojazd.nr_rej
 
 
