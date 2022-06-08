@@ -57,5 +57,14 @@ class tacho(models.Model):
     def __str__(self):
         return self.pojazd.nr_rej
 
+class ADR(models.Model):
+    nazwa = models.CharField(max_length=32, default="Dopuszczenie do przewodu ADR")
+    instytucja = models.CharField(default="TDT", max_length=40)
+    wymagane = models.BooleanField(default=False)
+    data_konc = models.DateField(blank=True, null=True)
+    pojazd = models.OneToOneField(VehiclesModel, on_delete=models.CASCADE, primary_key=True, related_name='przegladadr')
+    def __str__(self):
+        return self.pojazd.nr_rej        
+
 
 
