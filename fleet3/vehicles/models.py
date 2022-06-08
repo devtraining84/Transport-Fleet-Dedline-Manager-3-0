@@ -69,7 +69,17 @@ class ADR(models.Model):
 class NormaCzystosciSpalin(models.Model):
     norma = models.CharField(max_length=12, choices=EURO, default="nie dotyczy", null=True)
     wymagane = models.BooleanField(default=False)
-    pojazd = models.OneToOneField(VehiclesModel, on_delete=models.CASCADE, primary_key=True , related_name='normaeuro')             
+    pojazd = models.OneToOneField(VehiclesModel, on_delete=models.CASCADE, primary_key=True , related_name='normaeuro')
+
+
+class FRC(models.Model):
+    nazwa = models.CharField(max_length=32, default="Badanie termiczne chłodni ATP/FRC")
+    instytucja = models.CharField(default="Politechnika Poznańska, IMRiPS", max_length=40, null=True)
+    wymagane = models.BooleanField(default=False)
+    data_konc = models.DateField(blank=True, null=True)
+    pojazd = models.OneToOneField(VehiclesModel, on_delete=models.CASCADE, primary_key=True, related_name='przegladfrc')
+    def __str__(self):
+        return self.pojazd.nr_rej                 
 
 
 
