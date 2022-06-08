@@ -99,5 +99,15 @@ class TDT(models.Model):
     def __str__(self):
         return self.pojazd.nr_rej
 
+class UKO(models.Model):
+    instytucja = models.CharField(default="Zakład Ubezpieczeń", max_length=72, null=True)
+    OC = models.BooleanField(default=True)
+    AC = models.BooleanField(default=False)
+    NNW = models.BooleanField(default=False)
+    data_konc = models.DateField(blank=True, null=True)
+    nr_polisy = models.CharField(max_length=32, null=True)
+    pojazd = models.OneToOneField(VehiclesModel, on_delete=models.CASCADE, primary_key=True, related_name='komunikacyjne')
+
+
 
 
