@@ -11,3 +11,7 @@ class vehicle_form(forms.ModelForm):
     class Meta:
         model = VehiclesModel
         fields = ('rodzaj', 'marka', 'model', 'VIN', 'nr_rej', 'rok_prod')
+
+
+class SearchForm(forms.Form):
+    text = forms.CharField(max_length=40, required=False, label="")        

@@ -18,7 +18,7 @@ from django.urls import path
 
 from system.views import Start, LoginView, LogoutView, AlphaView
 
-from vehicles.views import AddVehicleView
+from vehicles.views import AddVehicleView, SearchVehicleView
 
 
 urlpatterns = [
@@ -29,4 +29,6 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name="logout"),
 #vehicles urls:
     path('add_vehicle/', AddVehicleView.as_view(), name="add-vehicle"),  
+    path('search/', SearchVehicleView.as_view(), name="search-vehicle"),
+
 ]
