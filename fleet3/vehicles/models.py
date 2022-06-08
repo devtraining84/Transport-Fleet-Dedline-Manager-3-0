@@ -39,3 +39,13 @@ class VehiclesModel(models.Model):
     def __str__(self):
         return f"{self.marka} {self.model} nr rej. {self.nr_rej}"
 
+class BT(models.Model):
+    nazwa = models.CharField(max_length=32, default="Przegląd techniczy pojazdu")
+    instytucja = models.CharField(default="Okręgowa Stacja Kontroli Pojazdów", max_length=40, null=True)
+    wymagane = models.BooleanField(default=True)
+    data_konc = models.DateField(null=True)
+    pojazd = models.OneToOneField(VehiclesModel, on_delete=models.CASCADE, primary_key=True, related_name='przegladtech')
+    def __str__(self):
+        return self.pojazd.nr_rej
+
+
