@@ -15,3 +15,7 @@ class vehicle_form(forms.ModelForm):
 
 class SearchForm(forms.Form):
     text = forms.CharField(max_length=40, required=False, label="")        
+
+
+class BridgeForm(forms.Form):
+    id = forms.IntegerField(required=True, label="")

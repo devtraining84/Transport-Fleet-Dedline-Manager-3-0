@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<br>
+    <h3>Popraw dane wybranego pojazdu:
+    <br>
+    <form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <br><hr>
+
+<input type="reset" value="Wyczyść">&nbsp
+<input type="submit" value="      Zapisz    ">
+<form action="/wykaz_pojazdow/0" method="get"><input type="submit" value="Anuluj"></form>
+        <br>{{ info }}
+</form>
+{% endblock %}
