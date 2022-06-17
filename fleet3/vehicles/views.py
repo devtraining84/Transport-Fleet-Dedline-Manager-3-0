@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.views import View
-from django.views.generic.edit import CreateView, FormView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from vehicles.models import VehiclesModel
 from vehicles.forms import SearchForm, BridgeForm, vehicle_form
@@ -21,7 +21,8 @@ class AddVehicleView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 
 class SearchVehicleView(LoginRequiredMixin, View):
-    def get(self, request):
+   
+   def get(self, request):
         form = SearchForm(request.GET)
         form.is_valid()
         text = form.cleaned_data.get('text', '')
@@ -66,11 +67,32 @@ class EditVehicleView(LoginRequiredMixin, UpdateView):
     fields = ['marka','model','nr_rej','rok_prod']
     template_name = 'edit_vehicle.html'
     success_url = '/search/'
+
+
+class BridgeDelView(LoginRequiredMixin, View):
+    def get(self, request):
+        form = BridgeForm()
+        return render(request, 'bridge_del.html', {'form': form})
+    def post(self, request):
+        form = BridgeForm(request.POST)
+        if form.is_valid():
+            obj = VehiclesModel.objects.filter(id=form.cleaned_data['id'])
+            if obj.exists():
+                return redirect(f'/delete/{obj[0].id}')
+            else:
+                info = 'Brak pojazdu o takim ID'
+                return render(request, 'bridge_del.html', {'form': form, 'info': info})
+
     
 
+class DeleteVehicleView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        vehicle = VehiclesModel.objects.get(id=id)
+        vehicle.delete()
+        return redirect('/search/')
 
 
-    
+
 
    
 
