@@ -19,10 +19,13 @@ from django.urls import path
 from system.views import Start, LoginView, LogoutView, AlphaView
 
 from vehicles.views import AddVehicleView, DeleteVehicleView, SearchVehicleView, BridgeEditView, EditVehicleView, BridgeDelView, DeleteVehicleView
+from vehicles.views import ShowVehicleView
+
 
 
 
 urlpatterns = [
+#system urls:    
     path('admin/', admin.site.urls),
     path('', Start.as_view(), name="index"),
     path('login/', LoginView.as_view(), name="log-in"),
@@ -34,5 +37,7 @@ urlpatterns = [
     path('edit/', BridgeEditView.as_view(), name="edit"),
     path('vehicles/<slug:pk>/edit/', EditVehicleView.as_view(), name="edit-view"),
     path('del/', BridgeDelView.as_view(), name="del"),
-    path('delete/<int:id>/', DeleteVehicleView.as_view(), name="delete-vehicle")
+    path('delete/<int:id>/', DeleteVehicleView.as_view(), name="delete-vehicle"),
+    path('vehiclelist/<int:select>/', ShowVehicleView.as_view(), name="list-of-vehicle"),
+
 ]

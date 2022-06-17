@@ -70,9 +70,11 @@ class EditVehicleView(LoginRequiredMixin, UpdateView):
 
 
 class BridgeDelView(LoginRequiredMixin, View):
+    
     def get(self, request):
         form = BridgeForm()
         return render(request, 'bridge_del.html', {'form': form})
+    
     def post(self, request):
         form = BridgeForm(request.POST)
         if form.is_valid():
@@ -86,12 +88,30 @@ class BridgeDelView(LoginRequiredMixin, View):
     
 
 class DeleteVehicleView(LoginRequiredMixin, View):
+    
     def get(self, request, id):
         vehicle = VehiclesModel.objects.get(id=id)
         vehicle.delete()
         return redirect('/search/')
 
 
+class ShowVehicleView(LoginRequiredMixin, View):
+    def get(self, request, select):
+        
+        if select == 0:
+            pojazdy = VehiclesModel.objects.all()
+            note = f"(wszystkie pojazdy). Pojazdów w bazie {len(pojazdy)}"
+            return render(request, 'show_all.html', {'pojazdy': pojazdy, 'note': note})
+        
+        elif select == 1:
+            pojazdy = VehiclesModel.objects.exclude(rodzaj__icontains="epa")
+            note = f"(tylko samochody ciężarowe i ciągniki siodłowe).Pojazdów w bazie {len(pojazdy)}"
+            return render(request, 'show_all.html', {'pojazdy': pojazdy, 'note': note})
+        
+        elif select == 2:
+            pojazdy = VehiclesModel.objects.filter(rodzaj__icontains="epa")
+            note = f"(tylko przyczepy i naczepy).Pojazdów w bazie {len(pojazdy)}"
+            return render(request, 'show_all.html', {'pojazdy': pojazdy, 'note': note})
 
 
    
