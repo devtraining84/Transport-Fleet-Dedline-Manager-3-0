@@ -69,6 +69,9 @@ class EditVehicleView(LoginRequiredMixin, UpdateView):
     success_url = '/search/'
 
 
+
+
+
 class BridgeDelView(LoginRequiredMixin, View):
     
     def get(self, request):
@@ -87,12 +90,20 @@ class BridgeDelView(LoginRequiredMixin, View):
 
     
 
+
+
+
 class DeleteVehicleView(LoginRequiredMixin, View):
     
     def get(self, request, id):
         vehicle = VehiclesModel.objects.get(id=id)
         vehicle.delete()
         return redirect('/search/')
+
+
+
+
+
 
 
 class ShowVehicleView(LoginRequiredMixin, View):
