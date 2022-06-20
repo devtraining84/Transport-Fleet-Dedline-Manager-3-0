@@ -101,15 +101,13 @@ class ShowVehicleView(LoginRequiredMixin, View):
         if select == 0:
             vehicles = VehiclesModel.objects.all()
             note = f"(wszystkie vehicles). Pojazdów w bazie {len(vehicles)}"
-            return render(request, 'show_all.html', {'vehicles': vehicles, 'note': note})
         elif select == 1:
             vehicles = VehiclesModel.objects.filter(truck=True)
             note = f"(tylko samochody ciężarowe i ciągniki siodłowe).Pojazdów w bazie {len(vehicles)}"
-            return render(request, 'show_all.html', {'vehicles': vehicles, 'note': note})
         elif select == 2:
             vehicles = VehiclesModel.objects.filter(truck=False)
             note = f"(tylko przyczepy i naczepy).Pojazdów w bazie {len(vehicles)}"
-            return render(request, 'show_all.html', {'vehicles': vehicles, 'note': note})
+        return render(request, 'show_all.html', {'vehicles': vehicles, 'note': note})
 
 
    
