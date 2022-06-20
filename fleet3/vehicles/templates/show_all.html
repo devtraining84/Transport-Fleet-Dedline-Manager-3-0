@@ -2,12 +2,12 @@
 {% load static %}
 {% block content %}
     <h4>Wykaz pojazów ze szczegółami:  {{ note }}</h4>
-<form action="/search/" method="get" id="button2" style="visibility: hidden;">
+<!-- <form action="/search/" method="get" id="search_button" style="visibility: hidden;">
 <input type="submit" value="Wyszukiwarka">
-</form>
+</form> -->
 <form action="/search/" method="get">
     {{ form }}
-<input type="submit" value="szukaj" id="button" style="visibility: visible">
+<input type="submit" value="szukaj" id="search_button" >
     </form>
 <table border="8">
 <thead>
@@ -31,7 +31,7 @@
 
 </tr>
 </thead>
-{% for i in pojazdy %}
+{% for i in vehicles %}
 <tr class="rows" style="background-color: white" >
     <td><center>{{ i.id }}</td>
     <td><center>{{ i.rodzaj }}</td>
@@ -64,7 +64,7 @@
 {% endfor %}
 </table>
 
-<script src="{% static "js/app.js" %}"></script>
+
 
 {% endblock %}
 

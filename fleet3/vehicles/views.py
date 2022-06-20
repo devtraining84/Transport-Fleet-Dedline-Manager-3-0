@@ -21,7 +21,6 @@ class AddVehicleView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 
 class SearchVehicleView(LoginRequiredMixin, View):
-   
    def get(self, request):
         form = SearchForm(request.GET)
         form.is_valid()
@@ -36,7 +35,7 @@ class SearchVehicleView(LoginRequiredMixin, View):
         note = f"wyszukano {len(result)}"
         ctx ={
             'form': form,
-            'pojazdy': result,
+            'vehicles': result,
              'note': note,
              }
         return render(request, 'show_all.html', ctx)
@@ -44,7 +43,6 @@ class SearchVehicleView(LoginRequiredMixin, View):
 
 
 class BridgeEditView(LoginRequiredMixin, View):
-    
     def get(self, request):
         form = BridgeForm()
         return render(request, 'bridge_edit.html', {'form': form})
@@ -71,9 +69,7 @@ class EditVehicleView(LoginRequiredMixin, UpdateView):
 
 
 
-
 class BridgeDelView(LoginRequiredMixin, View):
-    
     def get(self, request):
         form = BridgeForm()
         return render(request, 'bridge_del.html', {'form': form})
@@ -91,10 +87,7 @@ class BridgeDelView(LoginRequiredMixin, View):
     
 
 
-
-
 class DeleteVehicleView(LoginRequiredMixin, View):
-    
     def get(self, request, id):
         vehicle = VehiclesModel.objects.get(id=id)
         vehicle.delete()
@@ -103,26 +96,20 @@ class DeleteVehicleView(LoginRequiredMixin, View):
 
 
 
-
-
-
 class ShowVehicleView(LoginRequiredMixin, View):
     def get(self, request, select):
-        
         if select == 0:
-            pojazdy = VehiclesModel.objects.all()
-            note = f"(wszystkie pojazdy). Pojazdów w bazie {len(pojazdy)}"
-            return render(request, 'show_all.html', {'pojazdy': pojazdy, 'note': note})
-        
+            vehicles = VehiclesModel.objects.all()
+            note = f"(wszystkie vehicles). Pojazdów w bazie {len(vehicles)}"
+            return render(request, 'show_all.html', {'vehicles': vehicles, 'note': note})
         elif select == 1:
-            pojazdy = VehiclesModel.objects.exclude(rodzaj__icontains="epa")
-            note = f"(tylko samochody ciężarowe i ciągniki siodłowe).Pojazdów w bazie {len(pojazdy)}"
-            return render(request, 'show_all.html', {'pojazdy': pojazdy, 'note': note})
-        
+            vehicles = VehiclesModel.objects.filter(truck=True)
+            note = f"(tylko samochody ciężarowe i ciągniki siodłowe).Pojazdów w bazie {len(vehicles)}"
+            return render(request, 'show_all.html', {'vehicles': vehicles, 'note': note})
         elif select == 2:
-            pojazdy = VehiclesModel.objects.filter(rodzaj__icontains="epa")
-            note = f"(tylko przyczepy i naczepy).Pojazdów w bazie {len(pojazdy)}"
-            return render(request, 'show_all.html', {'pojazdy': pojazdy, 'note': note})
+            vehicles = VehiclesModel.objects.filter(truck=False)
+            note = f"(tylko przyczepy i naczepy).Pojazdów w bazie {len(vehicles)}"
+            return render(request, 'show_all.html', {'vehicles': vehicles, 'note': note})
 
 
    

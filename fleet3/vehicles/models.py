@@ -35,6 +35,7 @@ class VehiclesModel(models.Model):
     VIN = models.CharField(max_length=17,  unique=True, validators=[VIN_validator, VIN_unique])
     nr_rej = models.CharField(max_length=8, unique=True, verbose_name='nr rej.', validators=[REJ_validator, REJ_unique])
     rok_prod = models.PositiveSmallIntegerField(choices=ROCZNIK[:-1], verbose_name='rok produkcji')
+    truck = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.marka} {self.model} nr rej. {self.nr_rej}"
