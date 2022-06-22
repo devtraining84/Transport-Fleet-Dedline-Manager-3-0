@@ -1,3 +1,4 @@
+from datetime import date
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
@@ -113,21 +114,6 @@ class ShowVehicleView(LoginRequiredMixin, View):
    
 
 
-# class BookShowView(LoginRequiredMixin, View):
-#     def get(self, request):
-#         form = BridgeForm()
-#         return render(request, 'bridge_book.html', {'form': form})
-#     def post(self, request):
-#         form = BridgeForm(request.POST)
-#         if form.is_valid():
-#             if VehiclesModel.objects.filter(id=form.cleaned_data['id']).exists():
-#                 object = VehiclesModel.objects.get(id=form.cleaned_data['id'])
-#                 return redirect(f'/details/{object.id}')
-#             else:
-#                 info = 'Brak pojazdu o takim ID'
-#                 return render(request, 'bridge_book.html', {'form': form, 'info': info})
-#         else:
-#             return redirect('wrong/')
 
 
 class BridgeDetailsVehicleView(LoginRequiredMixin, View):
@@ -140,7 +126,14 @@ class BridgeDetailsVehicleView(LoginRequiredMixin, View):
         if form.is_valid():
             obj = VehiclesModel.objects.filter(id=form.cleaned_data['id'])
             if obj.exists():
-                return redirect(f'/delete/{obj[0].id}')
+                return redirect(f'/details/{obj[0].id}')
             else:
                 info = 'Brak pojazdu o takim ID'
-                return render(request, 'bridge_del.html', {'form': form, 'info': info})            
+                return render(request, 'bridge_del.html', {'form': form, 'info': info})       
+
+
+class VehicleDetailsView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        unit = VehiclesModel.objects.filter(id=id)
+        today = date.today()
+        return render(request, 'detail.html', {'unit': unit,'today': today})
