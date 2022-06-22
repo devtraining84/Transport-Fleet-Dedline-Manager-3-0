@@ -5,8 +5,8 @@ from django.db.models import Q
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
-from vehicles.models import VehiclesModel, BtModel
-from vehicles.forms import SearchForm, BridgeForm, BT_Form
+from vehicles.models import TachoModel, VehiclesModel, BtModel
+from vehicles.forms import SearchForm, BridgeForm, BT_Form, Tacho_Form
 
 # Create your views here.
 
@@ -155,6 +155,28 @@ class AddBtView(LoginRequiredMixin, View):
         unit = VehiclesModel.objects.get(id=id)
         object, created = BtModel.objects.get_or_create(pojazd=unit)
         form = BT_Form(request.POST, instance=object)
+        if form.is_valid():
+                form.save()
+                return redirect(f'/details/{id}')
+
+
+
+
+
+class AddTachoView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        unit = VehiclesModel.objects.get(id=id)
+        if TachoModel.objects.filter(pojazd=unit).exists():
+            bt_unit = TachoModel.objects.get(pojazd=unit)
+            form = Tacho_Form(instance=bt_unit)
+        else:
+            form = Tacho_Form()
+        ctx = {'unit': unit, 'form': form}
+        return render(request, 'add_tacho.html', ctx)
+    def post(self,request, id):
+        unit = VehiclesModel.objects.get(id=id)
+        object, created = TachoModel.objects.get_or_create(pojazd=unit)
+        form = Tacho_Form(request.POST, instance=object)
         if form.is_valid():
                 form.save()
                 return redirect(f'/details/{id}')

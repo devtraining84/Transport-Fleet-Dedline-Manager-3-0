@@ -49,7 +49,7 @@ class BtModel(models.Model):
     def __str__(self):
         return self.pojazd.nr_rej
 
-class tacho(models.Model):
+class TachoModel(models.Model):
     nazwa = models.CharField(max_length=60, default="Przegląd tachografu")
     instytucja = models.CharField(default="Okręgowa Stacja Kontroli Pojazdów", max_length=40)
     wymagane = models.BooleanField(default=False)
