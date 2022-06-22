@@ -113,3 +113,34 @@ class ShowVehicleView(LoginRequiredMixin, View):
    
 
 
+# class BookShowView(LoginRequiredMixin, View):
+#     def get(self, request):
+#         form = BridgeForm()
+#         return render(request, 'bridge_book.html', {'form': form})
+#     def post(self, request):
+#         form = BridgeForm(request.POST)
+#         if form.is_valid():
+#             if VehiclesModel.objects.filter(id=form.cleaned_data['id']).exists():
+#                 object = VehiclesModel.objects.get(id=form.cleaned_data['id'])
+#                 return redirect(f'/details/{object.id}')
+#             else:
+#                 info = 'Brak pojazdu o takim ID'
+#                 return render(request, 'bridge_book.html', {'form': form, 'info': info})
+#         else:
+#             return redirect('wrong/')
+
+
+class BridgeDetailsVehicleView(LoginRequiredMixin, View):
+    def get(self, request):
+        form = BridgeForm()
+        return render(request, 'bridge_book.html', {'form': form})
+    
+    def post(self, request):
+        form = BridgeForm(request.POST)
+        if form.is_valid():
+            obj = VehiclesModel.objects.filter(id=form.cleaned_data['id'])
+            if obj.exists():
+                return redirect(f'/delete/{obj[0].id}')
+            else:
+                info = 'Brak pojazdu o takim ID'
+                return render(request, 'bridge_del.html', {'form': form, 'info': info})            

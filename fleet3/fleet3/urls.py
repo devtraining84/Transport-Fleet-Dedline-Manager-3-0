@@ -19,7 +19,7 @@ from django.urls import path
 from system.views import Start, LoginView, LogoutView, AlphaView
 
 from vehicles.views import AddVehicleView, DeleteVehicleView, SearchVehicleView, BridgeEditView, EditVehicleView, BridgeDelView, DeleteVehicleView
-from vehicles.views import ShowVehicleView
+from vehicles.views import ShowVehicleView, BridgeDetailsVehicleView
 
 
 
@@ -39,5 +39,6 @@ urlpatterns = [
     path('del/', BridgeDelView.as_view(), name="del"),
     path('delete/<int:id>/', DeleteVehicleView.as_view(), name="delete-vehicle"),
     path('vehiclelist/<int:select>/', ShowVehicleView.as_view(), name="list-of-vehicle"),
-
+    path('details/', BridgeDetailsVehicleView.as_view(), name="detail"),
+    #path('details/<int:id>/', VehicleDetailsView.as_view(), name="vehicle-details"),
 ]
