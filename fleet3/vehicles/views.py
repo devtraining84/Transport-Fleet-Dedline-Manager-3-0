@@ -5,8 +5,8 @@ from django.db.models import Q
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
-from vehicles.models import VehiclesModel
-from vehicles.forms import SearchForm, BridgeForm, vehicle_form
+from vehicles.models import VehiclesModel, BtModel
+from vehicles.forms import SearchForm, BridgeForm, BT_Form
 
 # Create your views here.
 
@@ -65,7 +65,7 @@ class EditVehicleView(LoginRequiredMixin, UpdateView):
     model = VehiclesModel
     fields = ['marka','model','nr_rej','rok_prod']
     template_name = 'edit_vehicle.html'
-    success_url = '/search/'
+    success_url = '/vehiclelist/0/'
 
 
 
@@ -92,7 +92,7 @@ class DeleteVehicleView(LoginRequiredMixin, View):
     def get(self, request, id):
         vehicle = VehiclesModel.objects.get(id=id)
         vehicle.delete()
-        return redirect('/search/')
+        return redirect('/vehiclelist/0/')
 
 
 
@@ -113,9 +113,6 @@ class ShowVehicleView(LoginRequiredMixin, View):
 
    
 
-
-
-
 class BridgeDetailsVehicleView(LoginRequiredMixin, View):
     def get(self, request):
         form = BridgeForm()
@@ -132,8 +129,35 @@ class BridgeDetailsVehicleView(LoginRequiredMixin, View):
                 return render(request, 'bridge_del.html', {'form': form, 'info': info})       
 
 
+
+
 class VehicleDetailsView(LoginRequiredMixin, View):
     def get(self, request, id):
         unit = VehiclesModel.objects.filter(id=id)
         today = date.today()
         return render(request, 'detail.html', {'unit': unit,'today': today})
+
+
+
+
+class AddBtView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        unit = VehiclesModel.objects.get(id=id)
+        if BtModel.objects.filter(pojazd=unit).exists():
+            bt_unit=BtModel.objects.get(pojazd=unit)
+            form = BT_Form(instance=bt_unit)
+        else:
+            form = BT_Form()
+        ctx = {'unit': unit, 'form': form}
+        return render(request, 'add_BT.html', ctx)
+   
+    def post(self,request, id):
+        unit = VehiclesModel.objects.get(id=id)
+        object, created = BtModel.objects.get_or_create(pojazd=unit)
+        form = BT_Form(request.POST, instance=object)
+        if form.is_valid():
+                form.save()
+                return redirect(f'/details/{id}')
+        
+
+
