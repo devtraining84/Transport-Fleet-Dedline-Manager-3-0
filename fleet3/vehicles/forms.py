@@ -2,7 +2,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
-from vehicles.models import AdrModel, BtModel, TachoModel, VehiclesModel, UkoModel
+from vehicles.models import AdrModel, BtModel, TachoModel, UdtModel, VehiclesModel, UkoModel
 
 
 
@@ -72,6 +72,19 @@ class ADR_Form(forms.ModelForm):
     class Meta:
         model = AdrModel
         fields = ['instytucja', 'wymagane', 'data_konc']
-         widgets = {
+        widgets = {
         'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
         }  
+
+
+
+
+class UDT_Form(forms.ModelForm):
+    class Meta:
+        model = UdtModel
+        fields = ['instytucja', 'wymagane', 'data_konc']
+        widgets = {
+        'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
+        }  
+
+
