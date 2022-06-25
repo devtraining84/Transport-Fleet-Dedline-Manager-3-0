@@ -118,7 +118,7 @@ class UdtModel(models.Model):
 
 
 
-class TDT(models.Model):
+class TdtModel(models.Model):
     nazwa = models.CharField(max_length=64, default="Dozór zbiorników")
     instytucja = models.CharField(default="Transportowy Dozór Techniczny", max_length=40)
     wymagane = models.BooleanField(default=False)

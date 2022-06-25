@@ -5,8 +5,8 @@ from django.db.models import Q
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
-from vehicles.models import AdrModel, TachoModel, VehiclesModel, BtModel, UkoModel, UdtModel, FrcModel
-from vehicles.forms import FRC_Form, SearchForm, BridgeForm, BT_Form, Tacho_Form, UK_Form, ADR_Form, UDT_Form
+from vehicles.models import AdrModel, TachoModel, TdtModel, VehiclesModel, BtModel, UkoModel, UdtModel, FrcModel
+from vehicles.forms import FRC_Form, SearchForm, BridgeForm, BT_Form, Tacho_Form, UK_Form, ADR_Form, UDT_Form, TDT_Form
 
 # Create your views here.
 
@@ -263,6 +263,29 @@ class AddFrcView(LoginRequiredMixin, View):
         if form.is_valid():
             form.save()
             return redirect(f'/details/{id}')
+
+
+
+
+class AddTdtView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        unit = VehiclesModel.objects.get(id=id)
+        if TdtModel.objects.filter(pojazd=unit).exists():
+            bt_unit = TdtModel.objects.get(pojazd=unit)
+            form = TDT_Form(instance=bt_unit)
+        else:
+            form = TDT_Form()
+        ctx = {'unit': unit, 'form': form}
+        return render(request, 'addudt.html', ctx)
+    def post(self,request, id):
+        unit = VehiclesModel.objects.get(id=id)
+        form = TDT_Form(request.POST)
+        object, created = TdtModel.objects.get_or_create(pojazd=unit)
+        form = UK_Form(request.POST, instance=object)
+        if form.is_valid():
+            form.save()
+            return redirect(f'/details/{id}')
+     
      
         
            
