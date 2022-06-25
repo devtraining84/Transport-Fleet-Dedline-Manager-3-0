@@ -5,8 +5,8 @@ from django.db.models import Q
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
-from vehicles.models import TachoModel, VehiclesModel, BtModel
-from vehicles.forms import SearchForm, BridgeForm, BT_Form, Tacho_Form
+from vehicles.models import AdrModel, TachoModel, VehiclesModel, BtModel, UkoModel
+from vehicles.forms import SearchForm, BridgeForm, BT_Form, Tacho_Form, UK_Form, ADR_Form
 
 # Create your views here.
 
@@ -180,6 +180,45 @@ class AddTachoView(LoginRequiredMixin, View):
         if form.is_valid():
                 form.save()
                 return redirect(f'/details/{id}')
+
+
         
 
+class AddUkView(LoginRequiredMixin, View):
+   def get(self, request, id):
+        unit = VehiclesModel.objects.get(id=id)
+        form = UK_Form()
+        if UkoModel.objects.filter(pojazd=unit).exists():
+            bt_unit = UkoModel.objects.get(pojazd=unit)
+            form = UK_Form(instance=bt_unit)
+        ctx = {'unit': unit, 'form': form}
+        return render(request, 'adduk.html', ctx)
+   def post(self,request, id):
+       unit = VehiclesModel.objects.get(id=id)
+       object, created = UkoModel.objects.get_or_create(pojazd=unit)
+       form = UK_Form(request.POST, instance=object)
+       if form.is_valid():
+           form.save()
+           return redirect(f'/details/{id}')
+       
 
+
+
+class AddAdrVehView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        unit = VehiclesModel.objects.get(id=id)
+        if AdrModel.objects.filter(pojazd=unit).exists():
+            bt_unit = AdrModel.objects.get(pojazd=unit)
+            form = ADR_Form(instance=bt_unit)
+        else:
+            form = ADR_Form()
+        ctx = {'unit': unit, 'form': form}
+        return render(request, 'addadr.html', ctx)
+    def post(self,request, id):
+        unit = VehiclesModel.objects.get(id=id)
+        object, created = AdrModel.objects.get_or_create(pojazd=unit)
+        form = ADR_Form(request.POST, instance=object)
+        if form.is_valid():
+            form.save()
+                return redirect(f'/details/{id}')
+     

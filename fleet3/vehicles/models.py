@@ -10,6 +10,7 @@ def VIN_validator(value):
     if len(value) != 17:
         raise ValidationError('VIN 17 znaków !')
 
+
 def VIN_unique(value):
     data = VehiclesModel.objects.all()
     vins = []
@@ -17,9 +18,13 @@ def VIN_unique(value):
         vins.append(i.VIN)
     if value in vins:
         raise ValidationError('VIN juz istnieje w bazie !')
+
+
 def REJ_validator(value):
     if len(value) < 3:
         raise ValidationError('Za mało znaków !')
+
+
 def REJ_unique(value):
     data = VehiclesModel.objects.all()
     nrs = []
@@ -27,6 +32,8 @@ def REJ_unique(value):
         nrs.append(i.VIN)
     if value in nrs:
         raise ValidationError('Nr juz istnieje w bazie !')
+
+
 
 class VehiclesModel(models.Model):
     rodzaj = models.CharField(choices=RODZAJE, max_length=64)
@@ -40,6 +47,9 @@ class VehiclesModel(models.Model):
     def __str__(self):
         return f"{self.marka} {self.model} nr rej. {self.nr_rej}"
 
+
+
+
 class BtModel(models.Model):
     nazwa = models.CharField(max_length=32, default="Przegląd techniczy pojazdu")
     instytucja = models.CharField(default="Okręgowa Stacja Kontroli Pojazdów", max_length=40, null=True)
@@ -48,6 +58,9 @@ class BtModel(models.Model):
     pojazd = models.OneToOneField(VehiclesModel, on_delete=models.CASCADE, primary_key=True, related_name='przegladtech')
     def __str__(self):
         return self.pojazd.nr_rej
+
+
+
 
 class TachoModel(models.Model):
     nazwa = models.CharField(max_length=60, default="Przegląd tachografu")
@@ -58,7 +71,10 @@ class TachoModel(models.Model):
     def __str__(self):
         return self.pojazd.nr_rej
 
-class ADR(models.Model):
+
+
+
+class AdrModel(models.Model):
     nazwa = models.CharField(max_length=32, default="Dopuszczenie do przewodu ADR")
     instytucja = models.CharField(default="TDT", max_length=40)
     wymagane = models.BooleanField(default=False)
@@ -67,10 +83,15 @@ class ADR(models.Model):
     def __str__(self):
         return self.pojazd.nr_rej   
 
+
+
+
 class NormaCzystosciSpalin(models.Model):
     norma = models.CharField(max_length=12, choices=EURO, default="nie dotyczy", null=True)
     wymagane = models.BooleanField(default=False)
     pojazd = models.OneToOneField(VehiclesModel, on_delete=models.CASCADE, primary_key=True , related_name='normaeuro')
+
+
 
 
 class FRC(models.Model):
@@ -82,6 +103,9 @@ class FRC(models.Model):
     def __str__(self):
         return self.pojazd.nr_rej                 
 
+
+
+
 class UDT(models.Model):
     nazwa = models.CharField(max_length=60, default="Badanie dopuszczenia windy hydraulicznej lub HDS")
     instytucja = models.CharField(default="Urząd Dozoru Techniczego", max_length=40)
@@ -90,6 +114,9 @@ class UDT(models.Model):
     pojazd = models.OneToOneField(VehiclesModel, on_delete=models.CASCADE, primary_key=True, related_name='przegladudt')
     def __str__(self):
         return self.pojazd.nr_rej
+
+
+
 
 class TDT(models.Model):
     nazwa = models.CharField(max_length=64, default="Dozór zbiorników")
@@ -100,7 +127,10 @@ class TDT(models.Model):
     def __str__(self):
         return self.pojazd.nr_rej
 
-class UKO(models.Model):
+
+
+
+class UkoModel(models.Model):
     instytucja = models.CharField(default="Zakład Ubezpieczeń", max_length=72, null=True)
     OC = models.BooleanField(default=True)
     AC = models.BooleanField(default=False)
@@ -108,6 +138,9 @@ class UKO(models.Model):
     data_konc = models.DateField(blank=True, null=True)
     nr_polisy = models.CharField(max_length=32, null=True)
     pojazd = models.OneToOneField(VehiclesModel, on_delete=models.CASCADE, primary_key=True, related_name='komunikacyjne')
+
+
+
 
 
 
