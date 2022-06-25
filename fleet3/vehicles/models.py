@@ -94,7 +94,7 @@ class NormaCzystosciSpalin(models.Model):
 
 
 
-class FRC(models.Model):
+class FrcModel(models.Model):
     nazwa = models.CharField(max_length=32, default="Badanie termiczne chłodni ATP/FRC")
     instytucja = models.CharField(default="Politechnika Poznańska, IMRiPS", max_length=40, null=True)
     wymagane = models.BooleanField(default=False)

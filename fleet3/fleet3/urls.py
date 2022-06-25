@@ -20,7 +20,7 @@ from system.views import Start, LoginView, LogoutView, AlphaView
 
 from vehicles.views import AddVehicleView, DeleteVehicleView, SearchVehicleView, BridgeEditView, EditVehicleView, BridgeDelView, DeleteVehicleView
 from vehicles.views import ShowVehicleView, BridgeDetailsVehicleView,  VehicleDetailsView, AddBtView, AddTachoView, AddUkView, AddAdrVehView, AddUdtView
-
+from vehicles.views import AddFrcView
 
 
 
@@ -46,5 +46,6 @@ urlpatterns = [
     path('adduk/<int:id>', AddUkView.as_view(), name="add-uk"),
     path('addadr/<int:id>', AddAdrVehView.as_view(), name="add-adr"),
     path('addudt/<int:id>', AddUdtView.as_view(), name="add-udt"),
+    path('addfrc/<int:id>', AddFrcView.as_view(), name="add-frc"),
 ]
 

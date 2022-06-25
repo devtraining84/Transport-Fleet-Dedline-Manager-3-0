@@ -2,7 +2,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
-from vehicles.models import AdrModel, BtModel, TachoModel, UdtModel, VehiclesModel, UkoModel
+from vehicles.models import AdrModel, BtModel, TachoModel, UdtModel, VehiclesModel, UkoModel, FrcModel
 
 
 
@@ -39,6 +39,24 @@ class BT_Form(forms.ModelForm):
         self.fields['instytucja'].widget.attrs.update(size='50')
         self.fields['data_konc'].required = False
         self.fields['wymagane'].required = False
+
+
+
+
+class FRC_Form(forms.ModelForm):
+    class Meta:
+        model = FrcModel
+        fields = ['instytucja', 'wymagane', 'data_konc']
+        widgets = {
+        'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
+        } 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['instytucja'].widget.attrs.update(size='40')
+        self.fields['instytucja'].required = False
+        self.fields['data_konc'].required = False
+        self.fields['wymagane'].required = False
+     
 
 
 
