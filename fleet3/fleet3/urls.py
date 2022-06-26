@@ -19,8 +19,7 @@ from django.urls import path
 from system.views import Start, LoginView, LogoutView, AlphaView
 
 from vehicles.views import AddVehicleView, DeleteVehicleView, SearchVehicleView, BridgeEditView, EditVehicleView, BridgeDelView, DeleteVehicleView
-from vehicles.views import ShowVehicleView, BridgeDetailsVehicleView,  VehicleDetailsView, AddBtView, AddTachoView, AddUkView, AddAdrVehView, AddUdtView
-from vehicles.views import AddFrcView, AddTdtView
+from vehicles.views import ShowVehicleView, BridgeDetailsVehicleView,  VehicleDetailsView
 
 
 
@@ -41,12 +40,13 @@ urlpatterns = [
     path('vehiclelist/<int:select>/', ShowVehicleView.as_view(), name="list-of-vehicle"),
     path('details/', BridgeDetailsVehicleView.as_view(), name="detail"),
     path('details/<int:id>/', VehicleDetailsView.as_view(), name="vehicle-details"),
-    path('addbt/<int:id>/', AddBtView.as_view(), name="add-bt"),
-    path('addtacho/<int:id>', AddTachoView.as_view(), name="add-tacho"),
-    path('adduk/<int:id>', AddUkView.as_view(), name="add-uk"),
-    path('addadr/<int:id>', AddAdrVehView.as_view(), name="add-adr"),
-    path('addudt/<int:id>', AddUdtView.as_view(), name="add-udt"),
-    path('addfrc/<int:id>', AddFrcView.as_view(), name="add-frc"),
-    path('addtdt/<int:id>', AddTdtView.as_view(), name="add-tdt"),
+    # path('addbt/<int:id>/', AddBtView.as_view(), name="add-bt"),
+    # path('addtacho/<int:id>', AddTachoView.as_view(), name="add-tacho"),
+    # path('adduk/<int:id>', AddUkView.as_view(), name="add-uk"),
+    # path('addadr/<int:id>', AddAdrVehView.as_view(), name="add-adr"),
+    # path('addudt/<int:id>', AddUdtView.as_view(), name="add-udt"),
+    # path('addfrc/<int:id>', AddFrcView.as_view(), name="add-frc"),
+    # path('addtdt/<int:id>', AddTdtView.as_view(), name="add-tdt"),
+    # path('addeuro/', AddEuroView.as_view(), name="add-euro"),
 ]
 

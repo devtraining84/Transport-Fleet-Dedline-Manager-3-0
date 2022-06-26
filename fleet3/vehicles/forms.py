@@ -2,8 +2,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
-from vehicles.models import AdrModel, BtModel, TachoModel, TdtModel, UdtModel, VehiclesModel, UkoModel, FrcModel
-
+from vehicles.models import VehiclesModel
 
 
 
@@ -27,93 +26,96 @@ class BridgeForm(forms.Form):
 
 
 
-class BT_Form(forms.ModelForm):
-    class Meta:
-        model = BtModel
-        fields = ['instytucja', 'wymagane', 'data_konc']
-        widgets = {
-        'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
-    }   
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['instytucja'].widget.attrs.update(size='50')
-        self.fields['data_konc'].required = False
-        self.fields['wymagane'].required = False
+# class BT_Form(forms.ModelForm):
+#     class Meta:
+#         model = BtModel
+#         fields = ['instytucja', 'wymagane', 'data_konc']
+#         widgets = {
+#         'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
+#     }   
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         self.fields['instytucja'].widget.attrs.update(size='50')
+#         self.fields['data_konc'].required = False
+#         self.fields['wymagane'].required = False
 
 
 
 
-class FRC_Form(forms.ModelForm):
-    class Meta:
-        model = FrcModel
-        fields = ['instytucja', 'wymagane', 'data_konc']
-        widgets = {
-        'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
-        } 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['instytucja'].widget.attrs.update(size='40')
-        self.fields['instytucja'].required = False
-        self.fields['data_konc'].required = False
-        self.fields['wymagane'].required = False
+# class FRC_Form(forms.ModelForm):
+#     class Meta:
+#         model = FrcModel
+#         fields = ['instytucja', 'wymagane', 'data_konc']
+#         widgets = {
+#         'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
+#         } 
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         self.fields['instytucja'].widget.attrs.update(size='40')
+#         self.fields['instytucja'].required = False
+#         self.fields['data_konc'].required = False
+#         self.fields['wymagane'].required = False
      
 
 
 
 
-class Tacho_Form(forms.ModelForm):
-    class Meta:
-        model = TachoModel
-        fields = ['instytucja', 'wymagane', 'data_konc']
-        widgets = {
-        'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
-        }   
+# class Tacho_Form(forms.ModelForm):
+#     class Meta:
+#         model = TachoModel
+#         fields = ['instytucja', 'wymagane', 'data_konc']
+#         widgets = {
+#         'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
+#         }   
      
 
 
 
-class UK_Form(forms.ModelForm):
-    class Meta:
-        model = UkoModel
-        fields =[
-            'instytucja', 'data_konc', 'nr_polisy',
-            'OC', 'AC', 'NNW'
-            ]
-        widgets = {
-        'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
-        }  
+# class UK_Form(forms.ModelForm):
+#     class Meta:
+#         model = UkoModel
+#         fields =[
+#             'instytucja', 'data_konc', 'nr_polisy',
+#             'OC', 'AC', 'NNW'
+#             ]
+#         widgets = {
+#         'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
+#         }  
 
 
 
 
-class ADR_Form(forms.ModelForm):
-    class Meta:
-        model = AdrModel
-        fields = ['instytucja', 'wymagane', 'data_konc']
-        widgets = {
-        'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
-        }  
+# class ADR_Form(forms.ModelForm):
+#     class Meta:
+#         model = AdrModel
+#         fields = ['instytucja', 'wymagane', 'data_konc']
+#         widgets = {
+#         'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
+#         }  
 
 
 
 
-class UDT_Form(forms.ModelForm):
-    class Meta:
-        model = UdtModel
-        fields = ['instytucja', 'wymagane', 'data_konc']
-        widgets = {
-        'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
-        }  
+# class UDT_Form(forms.ModelForm):
+#     class Meta:
+#         model = UdtModel
+#         fields = ['instytucja', 'wymagane', 'data_konc']
+#         widgets = {
+#         'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
+#         }  
 
 
 
 
-class TDT_Form(forms.ModelForm):
-    class Meta:
-        model = TdtModel
-        fields = ['instytucja', 'wymagane', 'data_konc']
-        widgets = {
-        'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
-        }  
+# class TDT_Form(forms.ModelForm):
+#     class Meta:
+#         model = TdtModel
+#         fields = ['instytucja', 'wymagane', 'data_konc']
+#         widgets = {
+#         'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
+#         }  
+
+
+
 
 
