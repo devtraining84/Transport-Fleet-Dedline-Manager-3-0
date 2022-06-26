@@ -2,7 +2,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
-from vehicles.models import VehiclesModel
+from vehicles.models import VehiclesModel, VehiclePermitsAndDedlinesModel
 
 
 
@@ -22,6 +22,15 @@ class SearchForm(forms.Form):
 
 class BridgeForm(forms.Form):
     id = forms.IntegerField(required=True, label="")
+
+
+
+
+class EditVehicleComplexForm(forms.ModelForm):
+    class Meta:
+        model = VehiclePermitsAndDedlinesModel
+        fields ='__all__'
+
 
 
 

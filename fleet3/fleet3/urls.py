@@ -40,6 +40,7 @@ urlpatterns = [
     path('vehiclelist/<int:select>/', ShowVehicleView.as_view(), name="list-of-vehicle"),
     path('details/', BridgeDetailsVehicleView.as_view(), name="detail"),
     path('details/<int:id>/', VehicleDetailsView.as_view(), name="vehicle-details"),
+    
     # path('addbt/<int:id>/', AddBtView.as_view(), name="add-bt"),
     # path('addtacho/<int:id>', AddTachoView.as_view(), name="add-tacho"),
     # path('adduk/<int:id>', AddUkView.as_view(), name="add-uk"),
