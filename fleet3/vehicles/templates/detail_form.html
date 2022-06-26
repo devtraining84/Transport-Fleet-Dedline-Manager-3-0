@@ -13,6 +13,8 @@
         {% for i in unit %}
 Pojazd {{ i.rodzaj }} marka i model: {{ i.marka }}&nbsp;{{ i.model }}, rok produkcji: {{ i.rok_prod }}<br>
 nr rejestracyjny pojazdu: {{ i.nr_rej }},&nbsp;VIN: &nbsp;{{ i.VIN }},&nbsp; indeks w bazie danych: {{ i.pk }}<br>
+
+
 <hr size="1">
 <h4>Przegląd techniczny</h4>
 
@@ -26,7 +28,9 @@ Wymagany: {% if i.przegladtech.wymagane %}Tak
             {% endif %}</b> </font>       <br>
         Czas do końca: {{i.przegladtech.data_konc|timeuntil:today }}
         <a href="/addbt/{{ i.pk }}">AKTUALIZUJ </a>
-<hr size="1">
+
+
+        <hr size="1">
     <h4>Przegląd tachografu</h4>
 {{ i.przegladtacho.nazwa }} &nbsp; Wydany przez:{{ i.przegladtacho.instytucja }}<br>
 Wymagany: {% if i.przegladtacho.wymagane %}Tak
