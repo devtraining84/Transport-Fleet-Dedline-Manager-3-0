@@ -54,13 +54,12 @@ Wymagany: {% if i.details.tachograf_wymagane %}Tak
        
         <hr size="1"><div class="detail">
     <h4>Ubezpieczenie komunikacyjne</h4>
-{# tu wstawisz UK #}
-Ubezpieczyciel: {{ i.komunikacyjne.instytucja }} nr polisy:{% if i.komunikacyjne.nr_polisy %} {{ i.komunikacyjne.nr_polisy }} {% else  %}BRAK {% endif %}<br>
-Pakiet:&nbsp;{% if i.komunikacyjne.OC %} OC &nbsp;{% endif %}
-            &nbsp;{% if i.komunikacyjne.AC %} AC &nbsp;{% endif %}
-            &nbsp;{% if i.komunikacyjne.NNW %} NNW &nbsp;{% endif %}
-data końca umowy: {{ i.komunikacyjne.data_konc }}<br>
-Czas do końca: {{i.komunikacyjne.data_konc|timeuntil:today }}
+Ubezpieczyciel: {{ i.details.Ubezpieczeniakom_instytucja }} nr polisy:{% if i.details.Ubezpieczeniakom_nr_polisy %} {{ i.details.Ubezpieczeniakom_nr_polisy }} {% else  %}BRAK {% endif %}<br>
+Pakiet:<font color="red">&nbsp;{%if i.details.Ubezpieczeniakom_OC %} OC &nbsp;{% endif %}
+            &nbsp;{%if i.details.Ubezpieczeniakom_AC %} AC{% endif %} &nbsp;
+            &nbsp;{%if i.details.Ubezpieczeniakom_NNW %} NNW{% endif %} &nbsp;</font>
+            data końca umowy: {{ i.details.Ubezpieczeniakom_data_konc }}<br>
+Czas do końca: {{ i.details.Ubezpieczeniakom_data_konc|timeuntil:today }}
 <a href="/adduk/{{ i.pk }}">AKTUALIZUJ </a>
 </div>
 

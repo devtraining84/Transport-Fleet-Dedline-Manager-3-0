@@ -80,16 +80,16 @@ class Tacho_Form(forms.ModelForm):
 
 
 
-# class UK_Form(forms.ModelForm):
-#     class Meta:
-#         model = UkoModel
-#         fields =[
-#             'instytucja', 'data_konc', 'nr_polisy',
-#             'OC', 'AC', 'NNW'
-#             ]
-#         widgets = {
-#         'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
-#         }  
+class UK_Form(forms.ModelForm):
+    class Meta:
+        model = VehiclePermitsAndDedlinesModel
+        fields =[
+            'Ubezpieczeniakom_instytucja', 'Ubezpieczeniakom_data_konc', 'Ubezpieczeniakom_nr_polisy',
+            'Ubezpieczeniakom_OC', 'Ubezpieczeniakom_AC', 'Ubezpieczeniakom_NNW'
+            ]
+        widgets = {
+        'Ubezpieczeniakom_data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
+        }  
 
 
 

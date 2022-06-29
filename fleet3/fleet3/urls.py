@@ -18,7 +18,7 @@ from django.urls import path
 
 from system.views import Start, LoginView, LogoutView, AlphaView
 
-from vehicles.views import AddBtView, AddTachoView, AddVehicleView, DeleteVehicleView, SearchVehicleView, BridgeEditView, EditVehicleView, BridgeDelView, DeleteVehicleView
+from vehicles.views import AddBtView, AddTachoView, AddUkView, AddVehicleView, DeleteVehicleView, SearchVehicleView, BridgeEditView, EditVehicleView, BridgeDelView, DeleteVehicleView
 from vehicles.views import ShowVehicleView, BridgeDetailsVehicleView,  VehicleDetailsView
 
 
@@ -43,7 +43,7 @@ urlpatterns = [
     
     path('addbt/<int:id>/', AddBtView.as_view(), name="add-bt"),
     path('addtacho/<int:id>', AddTachoView.as_view(), name="add-tacho"),
-    # path('adduk/<int:id>', AddUkView.as_view(), name="add-uk"),
+    path('adduk/<int:id>', AddUkView.as_view(), name="add-uk"),
     # path('addadr/<int:id>', AddAdrVehView.as_view(), name="add-adr"),
     # path('addudt/<int:id>', AddUdtView.as_view(), name="add-udt"),
     # path('addfrc/<int:id>', AddFrcView.as_view(), name="add-frc"),
