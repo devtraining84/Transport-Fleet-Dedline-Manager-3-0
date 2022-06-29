@@ -6,8 +6,8 @@ from django.db.models import Q
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
-from vehicles.models import VehiclesModel
-from vehicles.forms import SearchForm, BridgeForm, EditVehicleComplexForm
+from vehicles.models import VehiclesModel, VehiclePermitsAndDedlinesModel
+from vehicles.forms import BT_Form, SearchForm, BridgeForm, EditVehicleComplexForm, Tacho_Form
 
 # Create your views here.
 
@@ -151,46 +151,46 @@ class VehicleDetailsFormView(LoginRequiredMixin, View):
 
 
 
-# class AddBtView(LoginRequiredMixin, View):
-#     def get(self, request, id):
-#         unit = VehiclesModel.objects.get(id=id)
-#         if BtModel.objects.filter(pojazd=unit).exists():
-#             bt_unit=BtModel.objects.get(pojazd=unit)
-#             form = BT_Form(instance=bt_unit)
-#         else:
-#             form = BT_Form()
-#         ctx = {'unit': unit, 'form': form}
-#         return render(request, 'add_BT.html', ctx)
+class AddBtView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        unit = VehiclesModel.objects.get(id=id)
+        if VehiclePermitsAndDedlinesModel.objects.filter(pojazd=unit).exists():
+            bt_unit=VehiclePermitsAndDedlinesModel.objects.get(pojazd=unit)
+            form = BT_Form(instance=bt_unit)
+        else:
+            form = BT_Form()
+        ctx = {'unit': unit, 'form': form}
+        return render(request, 'add_BT.html', ctx)
    
-#     def post(self,request, id):
-#         unit = VehiclesModel.objects.get(id=id)
-#         object, created = BtModel.objects.get_or_create(pojazd=unit)
-#         form = BT_Form(request.POST, instance=object)
-#         if form.is_valid():
-#                 form.save()
-#                 return redirect(f'/details/{id}')
+    def post(self,request, id):
+        unit = VehiclesModel.objects.get(id=id)
+        object, created = VehiclePermitsAndDedlinesModel.objects.update_or_create(pojazd=unit)
+        form = BT_Form(request.POST, instance=object)
+        if form.is_valid():
+                form.save()
+                return redirect(f'/details/{id}')
 
 
 
 
 
-# class AddTachoView(LoginRequiredMixin, View):
-#     def get(self, request, id):
-#         unit = VehiclesModel.objects.get(id=id)
-#         if TachoModel.objects.filter(pojazd=unit).exists():
-#             bt_unit = TachoModel.objects.get(pojazd=unit)
-#             form = Tacho_Form(instance=bt_unit)
-#         else:
-#             form = Tacho_Form()
-#         ctx = {'unit': unit, 'form': form}
-#         return render(request, 'add_tacho.html', ctx)
-#     def post(self,request, id):
-#         unit = VehiclesModel.objects.get(id=id)
-#         object, created = TachoModel.objects.get_or_create(pojazd=unit)
-#         form = Tacho_Form(request.POST, instance=object)
-#         if form.is_valid():
-#                 form.save()
-#                 return redirect(f'/details/{id}')
+class AddTachoView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        unit = VehiclesModel.objects.get(id=id)
+        if VehiclePermitsAndDedlinesModel.objects.filter(pojazd=unit).exists():
+            bt_unit = VehiclePermitsAndDedlinesModel.objects.get(pojazd=unit)
+            form = Tacho_Form(instance=bt_unit)
+        else:
+            form = Tacho_Form()
+        ctx = {'unit': unit, 'form': form}
+        return render(request, 'add_tacho.html', ctx)
+    def post(self,request, id):
+        unit = VehiclesModel.objects.get(id=id)
+        object, created = VehiclePermitsAndDedlinesModel.objects.get_or_create(pojazd=unit)
+        form = Tacho_Form(request.POST, instance=object)
+        if form.is_valid():
+                form.save()
+                return redirect(f'/details/{id}')
 
 
         

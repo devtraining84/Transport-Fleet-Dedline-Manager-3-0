@@ -21,15 +21,15 @@ nr rejestracyjny pojazdu: {{ i.nr_rej }},&nbsp;VIN: &nbsp;{{ i.VIN }},&nbsp; ind
         <hr size="1"><div class="detail">
 <h4>Przegląd techniczny</h4>
 
-{{ i.przegladtech.nazwa }} &nbsp; Wydany przez: {{ i.przegladtech.instytucja }}<br>
-Wymagany: {% if i.przegladtech.wymagane %}Tak
+{{ i.details.badanietechniczne_nazwa }} &nbsp; Wydany przez: {{ i.details.badanietechniczne_instytucja }}<br>
+Wymagany: {% if i.details.badanietechniczne_wymagane %}Tak
           {% else %} Nie
           {% endif %}
        <br> Data ważności przeglądu:<b><font color="red">
-            {% if i.przegladtech.data_konc %}{{ i.przegladtech.data_konc.isoformat}}
+            {% if i.details.badanietechniczne_data_konc %}{{ i.details.badanietechniczne_data_konc.isoformat}}
             {% else %}Brak w systemie
             {% endif %}</b> </font>       <br>
-        Czas do końca: {{i.przegladtech.data_konc|timeuntil:today }}
+        Czas do końca: {{i.details.badanietechniczne_data_konc|timeuntil:today }}
         <a href="/addbt/{{ i.pk }}">AKTUALIZUJ </a>
         </div>
 
@@ -37,15 +37,15 @@ Wymagany: {% if i.przegladtech.wymagane %}Tak
 
         <hr size="1"><div class="detail">
     <h4>Przegląd tachografu</h4>
-{{ i.przegladtacho.nazwa }} &nbsp; Wydany przez:{{ i.przegladtacho.instytucja }}<br>
-Wymagany: {% if i.przegladtacho.wymagane %}Tak
+{{ i.details.tachograf_nazwa }} &nbsp; Wydany przez:{{ i.details.tachograf_instytucja }}<br>
+Wymagany: {% if i.details.tachograf_wymagane %}Tak
           {% else %} Nie
           {% endif %}
        <br> Data ważności przeglądu:<b><font color="red">
-            {% if i.przegladtacho.data_konc %}{{ i.przegladtacho.data_konc.isoformat}}
+            {% if i.details.tachograf_data_konc %}{{ i.details.tachograf_data_konc.isoformat}}
             {% else %}Brak w systemie
             {% endif %}</b></font>            <br>
-        Czas do końca: {{i.przegladtacho.data_konc|timeuntil:today }}
+        Czas do końca: {{i.details.tachograf_data_konc|timeuntil:today }}
         <a href="/addtacho/{{ i.pk }}">AKTUALIZUJ </a>
         </div>
        
@@ -76,7 +76,7 @@ Wymagany: {% if i.przegladadr.wymagane %}Tak
             {% if i.przegladadr.data_konc %}{{ i.przegladadr.data_konc.isoformat}}
             {% else %}Brak w systemie
             {% endif %}</b></font>            <br>
-        Czas do końca: {{i.przegladtacho.data_konc|timeuntil:today }}
+        Czas do końca: {{i.details.data_konc|timeuntil:today }}
         <a href="/addadr/{{ i.pk }}">AKTUALIZUJ </a>
 
 </div>

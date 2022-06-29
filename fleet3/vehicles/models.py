@@ -23,7 +23,7 @@ class VehiclesModel(models.Model):
 
 
 class VehiclePermitsAndDedlinesModel(models.Model):
-    pojazd = models.OneToOneField(VehiclesModel, on_delete=models.CASCADE, primary_key=True, related_name='vehicle')
+    pojazd = models.OneToOneField(VehiclesModel, on_delete=models.CASCADE, primary_key=True, related_name='details')
     
     badanietechniczne_nazwa = models.CharField(max_length=32, default="Przegląd techniczy pojazdu")
     badanietechniczne_instytucja = models.CharField(default="Okręgowa Stacja Kontroli Pojazdów", max_length=40, null=True)
@@ -33,7 +33,7 @@ class VehiclePermitsAndDedlinesModel(models.Model):
     tachograf_nazwa = models.CharField(max_length=60, default="Przegląd tachografu")
     tachograf_instytucja = models.CharField(default="Okręgowa Stacja Kontroli Pojazdów", max_length=40)
     tachograf_wymagane = models.BooleanField(default=False)
-    trachograf_data_konc = models.DateField(blank=True, null=True)
+    tachograf_data_konc = models.DateField(blank=True, null=True)
 
     ADR_nazwa = models.CharField(max_length=32, default="Dopuszczenie do przewodu ADR")
     ADR_instytucja = models.CharField(default="TDT", max_length=40)

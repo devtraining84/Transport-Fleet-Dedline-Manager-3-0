@@ -40,14 +40,14 @@
     <td><center>{{ i.VIN }}</td>
     <td><center>{{ i.nr_rej }}</td>
     <td><center>{{ i.rok_prod }}</td>
-    <td><center>{{ i.badanietechniczne_data_konc }}</td>
-    <td><center>{{ i.tachograf_data_konc }}</td>
-    <td><center>{{ i.euro_norma}}</td>
-    <td><center>{{ i.UDT_data_konc }}</td>
-    <td><center>{{ i.TDT_data_konc }}</td>
-    <td><center>{{ i.ADR_data_konc }}</center></td>
-    <td><center>{{ i.FRC_data_konc }}</td>
-    <td><center>{{ i.Ubezpieczeniakom_data_konc}}</td>
+    <td><center>{% if i.details.badanietechniczne_data_konc %}{{ i.details.badanietechniczne_data_konc }}{% endif %}</td>
+    <td><center>{% if i.details.tachograf_data_konc %} {{ i.details.tachograf_data_konc }} {% endif %}</td>
+    <td><center>{% if i.details.euro_norma %}{{ i.details.euro_norma}} {% endif %}</td>
+    <td><center>{% if i.details.UDT_data_konc %}{{ i.details.UDT_data_konc }}{% endif %}</td>
+    <td><center>{% if i.details.TDT_data_konc %}{{ i.details.TDT_data_konc }}{% endif %}</td>
+    <td><center>{% if i.details.ADR_data_konc %}  {{ i.details.ADR_data_konc }} {% endif %}</td>
+    <td><center>{% if i.details.FRC_data_konc %} {{ i.details.FRC_data_konc }} {% endif %}</td>
+    <td><center>{% if i.details.Ubezpieczeniakom_data_konc %} {{ i.details.Ubezpieczeniakom_data_konc}} {% endif %}</td>
 
         <td class="functional"><b><center>
         <a href="/details/{{ i.pk }}"/>

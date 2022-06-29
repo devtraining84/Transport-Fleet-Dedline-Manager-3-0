@@ -35,18 +35,18 @@ class EditVehicleComplexForm(forms.ModelForm):
 
 
 
-# class BT_Form(forms.ModelForm):
-#     class Meta:
-#         model = BtModel
-#         fields = ['instytucja', 'wymagane', 'data_konc']
-#         widgets = {
-#         'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
-#     }   
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.fields['instytucja'].widget.attrs.update(size='50')
-#         self.fields['data_konc'].required = False
-#         self.fields['wymagane'].required = False
+class BT_Form(forms.ModelForm):
+    class Meta:
+        model = VehiclePermitsAndDedlinesModel
+        fields = ['badanietechniczne_instytucja', 'badanietechniczne_wymagane', 'badanietechniczne_data_konc']
+        widgets = {
+        'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
+    }   
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['badanietechniczne_instytucja'].widget.attrs.update(size='50')
+        self.fields['badanietechniczne_data_konc'].required = False
+        self.fields['badanietechniczne_wymagane'].required = False
 
 
 
@@ -69,13 +69,13 @@ class EditVehicleComplexForm(forms.ModelForm):
 
 
 
-# class Tacho_Form(forms.ModelForm):
-#     class Meta:
-#         model = TachoModel
-#         fields = ['instytucja', 'wymagane', 'data_konc']
-#         widgets = {
-#         'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
-#         }   
+class Tacho_Form(forms.ModelForm):
+    class Meta:
+        model = VehiclePermitsAndDedlinesModel
+        fields = ['tachograf_instytucja', 'tachograf_wymagane', 'tachograf_data_konc']
+        widgets = {
+        'tachograf_data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
+        }   
      
 
 
