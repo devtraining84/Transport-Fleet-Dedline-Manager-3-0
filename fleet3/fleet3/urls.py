@@ -18,7 +18,7 @@ from django.urls import path
 
 from system.views import Start, LoginView, LogoutView, AlphaView
 
-from vehicles.views import AddAdrVehView, AddBtView, AddTachoView, AddTdtView, AddUdtView, AddUkView, AddVehicleView, DeleteVehicleView, SearchVehicleView, BridgeEditView, EditVehicleView, BridgeDelView, DeleteVehicleView
+from vehicles.views import AddAdrVehView, AddBtView, AddFrcView, AddTachoView, AddTdtView, AddUdtView, AddUkView, AddVehicleView, DeleteVehicleView, SearchVehicleView, BridgeEditView, EditVehicleView, BridgeDelView, DeleteVehicleView
 from vehicles.views import ShowVehicleView, BridgeDetailsVehicleView,  VehicleDetailsView
 
 
@@ -46,7 +46,7 @@ urlpatterns = [
     path('adduk/<int:id>', AddUkView.as_view(), name="add-uk"),
     path('addadr/<int:id>', AddAdrVehView.as_view(), name="add-adr"),
     path('addudt/<int:id>', AddUdtView.as_view(), name="add-udt"),
-    # path('addfrc/<int:id>', AddFrcView.as_view(), name="add-frc"),
+    path('addfrc/<int:id>', AddFrcView.as_view(), name="add-frc"),
     path('addtdt/<int:id>', AddTdtView.as_view(), name="add-tdt"),
     # path('addeuro/', AddEuroView.as_view(), name="add-euro"),
 ]

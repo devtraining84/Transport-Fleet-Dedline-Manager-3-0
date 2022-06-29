@@ -51,20 +51,14 @@ class BT_Form(forms.ModelForm):
 
 
 
-# class FRC_Form(forms.ModelForm):
-#     class Meta:
-#         model = FrcModel
-#         fields = ['instytucja', 'wymagane', 'data_konc']
-#         widgets = {
-#         'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
-#         } 
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.fields['instytucja'].widget.attrs.update(size='40')
-#         self.fields['instytucja'].required = False
-#         self.fields['data_konc'].required = False
-#         self.fields['wymagane'].required = False
-     
+class FRC_Form(forms.ModelForm):
+    class Meta:
+        model = VehiclePermitsAndDedlinesModel
+        fields = ['FRC_instytucja', 'FRC_wymagane', 'FRC_data_konc']
+        widgets = {
+        'FRC_data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
+        } 
+   
 
 
 

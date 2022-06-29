@@ -122,15 +122,15 @@ Wymagany: {% if i.details.UDT_wymagane %}Tak
 
 <hr size="1"><div class="detail">
     <h4>Certyfikat FRC</h4>
-{{ i.przegladfrc.nazwa }} &nbsp; Wydany przez:{{ i.przegladfrc.instytucja }}<br>
-Wymagany: {% if i.przegladfrc.wymagane %}Tak
+{{ i.details.FRC_nazwa }} &nbsp; Wydany przez:{{ i.details.FRC_instytucja }}<br>
+Wymagany: {% if i.details.FRC_wymagane %}Tak
           {% else %} Nie
           {% endif %}
        <br> Data ważności certyfikatu:<b><font color="red">
-            {% if i.przegladfrc.data_konc %}{{ i.przegladfrc.data_konc.isoformat}}
+            {% if i.details.FRC_data_konc %}{{ i.details.FRC_data_konc.isoformat}}
             {% else %}Brak w systemie
             {% endif %}</b></font>            <br>
-        Czas do końca: {{i.przegladfrc.data_konc|timeuntil:today }}
+        Czas do końca: {{i.details.FRC_data_konc|timeuntil:today }}
         <a href="/addfrc/{{ i.pk }}">AKTUALIZUJ </a>
         </div>
        
