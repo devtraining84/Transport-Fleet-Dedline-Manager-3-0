@@ -7,7 +7,7 @@ from django.views import View
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from vehicles.models import VehiclesModel, VehiclePermitsAndDedlinesModel
-from vehicles.forms import ADR_Form, BT_Form, SearchForm, BridgeForm, EditVehicleComplexForm, Tacho_Form, UK_Form
+from vehicles.forms import ADR_Form, BT_Form, SearchForm, BridgeForm, EditVehicleComplexForm, Tacho_Form, UDT_Form, UK_Form
 
 # Create your views here.
 
@@ -236,23 +236,23 @@ class AddAdrVehView(LoginRequiredMixin, View):
 
 
 
-# class AddUdtView(LoginRequiredMixin, View):
-#     def get(self, request, id):
-#         unit = VehiclesModel.objects.get(id=id)
-#         if UdtModel.objects.filter(pojazd=unit).exists():
-#             bt_unit = UdtModel.objects.get(pojazd=unit)
-#             form = UDT_Form(instance=bt_unit)
-#         else:
-#             form = UDT_Form()
-#         ctx = {'unit': unit, 'form': form}
-#         return render(request, 'addudt.html', ctx)
-#     def post(self,request, id):
-#         unit = VehiclesModel.objects.get(id=id)
-#         object, created = UdtModel.objects.get_or_create(pojazd=unit)
-#         form = UDT_Form(request.POST, instance=object)
-#         if form.is_valid():
-#             form.save()
-#             return redirect(f'/details/{id}')
+class AddUdtView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        unit = VehiclesModel.objects.get(id=id)
+        if VehiclePermitsAndDedlinesModel.objects.filter(pojazd=unit).exists():
+            bt_unit = VehiclePermitsAndDedlinesModel.objects.get(pojazd=unit)
+            form = UDT_Form(instance=bt_unit)
+        else:
+            form = UDT_Form()
+        ctx = {'unit': unit, 'form': form}
+        return render(request, 'addudt.html', ctx)
+    def post(self,request, id):
+        unit = VehiclesModel.objects.get(id=id)
+        object, created = VehiclePermitsAndDedlinesModel.objects.get_or_create(pojazd=unit)
+        form = UDT_Form(request.POST, instance=object)
+        if form.is_valid():
+            form.save()
+            return redirect(f'/details/{id}')
 
 
 

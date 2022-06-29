@@ -105,13 +105,13 @@ class ADR_Form(forms.ModelForm):
 
 
 
-# class UDT_Form(forms.ModelForm):
-#     class Meta:
-#         model = UdtModel
-#         fields = ['instytucja', 'wymagane', 'data_konc']
-#         widgets = {
-#         'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
-#         }  
+class UDT_Form(forms.ModelForm):
+    class Meta:
+        model = VehiclePermitsAndDedlinesModel
+        fields = ['UDT_instytucja', 'UDT_wymagane', 'UDT_data_konc']
+        widgets = {
+        'UDT_data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
+        }  
 
 
 

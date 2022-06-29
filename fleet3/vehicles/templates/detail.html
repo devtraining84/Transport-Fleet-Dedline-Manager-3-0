@@ -86,15 +86,15 @@ Wymagany: {% if i.details.ADR_wymagane %}Tak
 
 <hr size="1"><div class="detail">
     <h4>Badania UDT</h4>
-{{ i.przegladudt.nazwa }} &nbsp; Wydany przez:{{ i.przegladudt.instytucja }}<br>
-Wymagany: {% if i.przegladudt.wymagane %}Tak
+{{ i.details.UDT_nazwa }} &nbsp; Wydany przez:{{ i.details.UDT_instytucja }}<br>
+Wymagany: {% if i.details.UDT_wymagane %}Tak
           {% else %} Nie
           {% endif %}
        <br> Data ważności przeglądu:<b><font color="red">
-            {% if i.przegladudt.data_konc %}{{ i.przegladudt.data_konc.isoformat}}
+            {% if i.details.UDT_data_konc %}{{ i.details.UDT_data_konc.isoformat}}
             {% else %}Brak w systemie
             {% endif %}</b></font>            <br>
-        Czas do końca: {{i.przegladudt.data_konc|timeuntil:today }}
+        Czas do końca: {{i.details.UDT_data_konc|timeuntil:today }}
         <a href="/addudt/{{ i.pk }}">AKTUALIZUJ </a>
         </div>
 
