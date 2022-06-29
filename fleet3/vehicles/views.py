@@ -7,7 +7,7 @@ from django.views import View
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from vehicles.models import VehiclesModel, VehiclePermitsAndDedlinesModel
-from vehicles.forms import ADR_Form, BT_Form, SearchForm, BridgeForm, EditVehicleComplexForm, Tacho_Form, UDT_Form, UK_Form
+from vehicles.forms import ADR_Form, BT_Form, SearchForm, BridgeForm, EditVehicleComplexForm, TDT_Form, Tacho_Form, UDT_Form, UK_Form
 
 # Create your views here.
 
@@ -278,24 +278,24 @@ class AddUdtView(LoginRequiredMixin, View):
 
 
 
-# class AddTdtView(LoginRequiredMixin, View):
-#     def get(self, request, id):
-#         unit = VehiclesModel.objects.get(id=id)
-#         if TdtModel.objects.filter(pojazd=unit).exists():
-#             bt_unit = TdtModel.objects.get(pojazd=unit)
-#             form = TDT_Form(instance=bt_unit)
-#         else:
-#             form = TDT_Form()
-#         ctx = {'unit': unit, 'form': form}
-#         return render(request, 'addudt.html', ctx)
-#     def post(self,request, id):
-#         unit = VehiclesModel.objects.get(id=id)
-#         form = TDT_Form(request.POST)
-#         object, created = TdtModel.objects.get_or_create(pojazd=unit)
-#         form = UK_Form(request.POST, instance=object)
-#         if form.is_valid():
-#             form.save()
-#             return redirect(f'/details/{id}')
+class AddTdtView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        unit = VehiclesModel.objects.get(id=id)
+        if VehiclePermitsAndDedlinesModel.objects.filter(pojazd=unit).exists():
+            bt_unit = VehiclePermitsAndDedlinesModel.objects.get(pojazd=unit)
+            form = TDT_Form(instance=bt_unit)
+        else:
+            form = TDT_Form()
+        ctx = {'unit': unit, 'form': form}
+        return render(request, 'addtdt.html', ctx)
+    def post(self,request, id):
+        unit = VehiclesModel.objects.get(id=id)
+        form = TDT_Form(request.POST)
+        object, created = VehiclePermitsAndDedlinesModel.objects.get_or_create(pojazd=unit)
+        form = TDT_Form(request.POST, instance=object)
+        if form.is_valid():
+            form.save()
+            return redirect(f'/details/{id}')
 
 
 

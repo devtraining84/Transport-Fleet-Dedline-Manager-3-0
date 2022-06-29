@@ -116,15 +116,14 @@ class UDT_Form(forms.ModelForm):
 
 
 
-# class TDT_Form(forms.ModelForm):
-#     class Meta:
-#         model = TdtModel
-#         fields = ['instytucja', 'wymagane', 'data_konc']
-#         widgets = {
-#         'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
-#         }  
 
-
+class TDT_Form(forms.ModelForm):
+    class Meta:
+        model = VehiclePermitsAndDedlinesModel
+        fields = ['TDT_instytucja', 'TDT_wymagane', 'TDT_data_konc']
+        widgets = {
+        'TDT_data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
+        }  
 
 
 
