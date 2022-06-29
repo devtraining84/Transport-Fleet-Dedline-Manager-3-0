@@ -94,13 +94,13 @@ class UK_Form(forms.ModelForm):
 
 
 
-# class ADR_Form(forms.ModelForm):
-#     class Meta:
-#         model = AdrModel
-#         fields = ['instytucja', 'wymagane', 'data_konc']
-#         widgets = {
-#         'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
-#         }  
+class ADR_Form(forms.ModelForm):
+    class Meta:
+        model = VehiclePermitsAndDedlinesModel
+        fields = ['ADR_instytucja', 'ADR_wymagane', 'ADR_data_konc']
+        widgets = {
+        'ADR_data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
+        }  
 
 
 

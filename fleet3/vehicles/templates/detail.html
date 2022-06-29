@@ -67,20 +67,21 @@ Czas do końca: {{ i.details.Ubezpieczeniakom_data_konc|timeuntil:today }}
 
 <hr size="1"><div class="detail">
 <h4>Dopuszczenie ADR</h4>
-{{ i.przegladadr.nazwa }} &nbsp; Wydany przez:{{ i.przegladadr.instytucja }}<br>
-Wymagany: {% if i.przegladadr.wymagane %}Tak
+{{ i.details.ADR_nazwa }} &nbsp; Wydany przez:{{ i.details.ADR_instytucja }}<br>
+Wymagany: {% if i.details.ADR_wymagane %}Tak
           {% else %} Nie
           {% endif %}
        <br> Data ważności przeglądu:<b><font color="red">
-            {% if i.przegladadr.data_konc %}{{ i.przegladadr.data_konc.isoformat}}
+            {% if i.details.ADR_data_konc %}{{ i.details.ADR_data_konc.isoformat}}
             {% else %}Brak w systemie
             {% endif %}</b></font>            <br>
-        Czas do końca: {{i.details.data_konc|timeuntil:today }}
+        Czas do końca: {{i.details.ADR_data_konc|timeuntil:today }}
         <a href="/addadr/{{ i.pk }}">AKTUALIZUJ </a>
 
 </div>
 
 
+    
 
 
 <hr size="1"><div class="detail">
