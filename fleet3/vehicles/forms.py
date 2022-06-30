@@ -121,3 +121,12 @@ class TDT_Form(forms.ModelForm):
 
 
 
+
+class Euro_Form(forms.ModelForm):
+    class Meta:
+        model = VehiclePermitsAndDedlinesModel
+        fields = ['euro_norma', 'euro_wymagane']
+
+        
+        
+

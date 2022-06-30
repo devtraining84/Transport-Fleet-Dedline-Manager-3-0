@@ -16,9 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from system.views import Start, LoginView, LogoutView, AlphaView
+from system.views import LoginView, LogoutView, AlphaView, StartView, HelpView, AboutView
 
-from vehicles.views import AddAdrVehView, AddBtView, AddFrcView, AddTachoView, AddTdtView, AddUdtView, AddUkView, AddVehicleView, DeleteVehicleView, SearchVehicleView, BridgeEditView, EditVehicleView, BridgeDelView, DeleteVehicleView
+from vehicles.views import AddAdrVehView, AddBtView, AddEuroView, AddFrcView, AddTachoView, AddTdtView, AddUdtView, AddUkView, AddVehicleView, DeleteVehicleView, SearchVehicleView, BridgeEditView, EditVehicleView, BridgeDelView, DeleteVehicleView
 from vehicles.views import ShowVehicleView, BridgeDetailsVehicleView,  VehicleDetailsView
 
 
@@ -26,10 +26,12 @@ from vehicles.views import ShowVehicleView, BridgeDetailsVehicleView,  VehicleDe
 urlpatterns = [
 #system urls:    
     path('admin/', admin.site.urls),
-    path('', Start.as_view(), name="index"),
+    path('', StartView.as_view(), name="index"),
     path('login/', LoginView.as_view(), name="log-in"),
     path('login/start/', AlphaView.as_view(), name="front-site"),
     path('logout/', LogoutView.as_view(), name="logout"),
+    path('help/', HelpView.as_view(), name='help'),
+    path('about/',AboutView.as_view(), name='about'),
 #vehicles urls:
     path('add_vehicle/', AddVehicleView.as_view(), name="add-vehicle"),  
     path('search/', SearchVehicleView.as_view(), name="search-vehicle"),
@@ -48,6 +50,6 @@ urlpatterns = [
     path('addudt/<int:id>', AddUdtView.as_view(), name="add-udt"),
     path('addfrc/<int:id>', AddFrcView.as_view(), name="add-frc"),
     path('addtdt/<int:id>', AddTdtView.as_view(), name="add-tdt"),
-    # path('addeuro/', AddEuroView.as_view(), name="add-euro"),
+    path('addeuro/<int:id>', AddEuroView.as_view(), name="add-euro"),
 ]
 

@@ -10,8 +10,11 @@ from django.views import View
 from system.forms import LoginForm
 
 
-class Start(TemplateView):
+class StartView(TemplateView):
     template_name="start.html"
+
+
+
 
 class LoginView(View):
     def get(self, request):
@@ -33,11 +36,29 @@ class LoginView(View):
             {'form': form, 'text': text}
         )
 
+
+
+
 class LogoutView(View):
     def get(self, request):
         logout(request)
         return redirect('/')
 
+
+
+
 class AlphaView(LoginRequiredMixin, View):
     def get(self, request):
         return render(request, 'alpha.html', {})
+
+
+
+
+class HelpView(TemplateView):
+    template_name="help.html"
+
+
+
+
+class AboutView(TemplateView):
+    template_name="about.html"

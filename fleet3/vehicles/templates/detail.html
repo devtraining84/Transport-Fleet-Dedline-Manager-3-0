@@ -136,8 +136,8 @@ Wymagany: {% if i.details.FRC_wymagane %}Tak
        
 
 <hr size="1"><div class="detail">
-            <h4>Norma czystości spalin {{ i.normaeuro.norma }}</h4>
-            {% if i.normaeuro.wymagane %} 
+            <h4>Norma czystości spalin {{ i.details.euro_norma }}</h4>
+            {% if i.details.euro_wymagane %} 
             {% else %}Nie dotyczy
             {% endif %}<br>
             <a href="/addeuro/{{ i.pk }}">AKTUALIZUJ </a><br>

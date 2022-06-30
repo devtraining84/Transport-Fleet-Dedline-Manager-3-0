@@ -1,13 +1,13 @@
 from datetime import date
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from vehicles.models import VehiclesModel, VehiclePermitsAndDedlinesModel
-from vehicles.forms import ADR_Form, BT_Form, FRC_Form, SearchForm, BridgeForm, EditVehicleComplexForm, TDT_Form, Tacho_Form, UDT_Form, UK_Form
+from vehicles.forms import ADR_Form, BT_Form, Euro_Form, FRC_Form, SearchForm, BridgeForm, EditVehicleComplexForm, TDT_Form, Tacho_Form, UDT_Form, UK_Form
 
 # Create your views here.
 
@@ -300,13 +300,26 @@ class AddTdtView(LoginRequiredMixin, View):
 
 
 
-# class AddEuroView(LoginRequiredMixin, UpdateView):
-#     model = EuroModel
-#     fields = ['wymagane', 'norma']
-#     template_name = 'addeuro.html'
-    
+class AddEuroView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        unit = VehiclesModel.objects.get(id=id)
+        if VehiclePermitsAndDedlinesModel.objects.filter(pojazd=unit).exists():
+            bt_unit = VehiclePermitsAndDedlinesModel.objects.get(pojazd=unit)
+            form = Euro_Form(instance=bt_unit)
+        else:
+            form = Euro_Form()
+        ctx = {'unit': unit, 'form': form}
+        return render(request, 'addeuro.html', ctx)
+    def post(self,request, id):
+        unit = VehiclesModel.objects.get(id=id)
+        form = Euro_Form(request.POST)
+        object, created = VehiclePermitsAndDedlinesModel.objects.get_or_create(pojazd=unit)
+        form = Euro_Form(request.POST, instance=object)
+        if form.is_valid():
+            form.save()
+            return redirect(f'/details/{id}')
 
-        
-        
-           
-     
+
+
+
+
