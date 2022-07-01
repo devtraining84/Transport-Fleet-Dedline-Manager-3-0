@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 
@@ -20,20 +20,30 @@ class AddDriverView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 
 
-class UpdateDriverView(LoginRequiredMixin, SuccessMessageMixin , UpdateView):
+class UpdateDriverView(LoginRequiredMixin, UpdateView):
     model = DriversModel
     fields = '__all__'
     template_name = 'edit_driver.html'
-    success_url = '/'
+    success_url = '/drivers/'
 
 
 
 
-class DeleteDriverView(LoginRequiredMixin, DeleteView):
-    model = DriversModel
-    template_name = 'driversmodel_confirm_delete.html'
-    success_message ='usunieto'
-    success_url = '/'
+class DeleteDriverView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        employee = DriversModel.objects.get(id=id)
+        employee.delete()
+        return redirect('/drivers/')
+
+
+
+
+class ShowDriversView(LoginRequiredMixin, View):
+    def get(self, request):
+        drivers = DriversModel.objects.all()
+        note = f"Kierowców w bazie {len(drivers)}"
+        return render(request, 'show_drivers.html', {'drivers': drivers, 'note': note})
+
 
 
 

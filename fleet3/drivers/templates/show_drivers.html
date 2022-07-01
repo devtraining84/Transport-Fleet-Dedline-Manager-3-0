@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <h4>Wykaz kierowców ze szczegółami.  {{ note }}</h4>
+<form action="/searchperson/" method="get" id="button2" style="visibility: hidden;">
+<input type="submit" value="Wyszukiwarka">
+</form>
+<form action="" method="get">
+    {{ form }}
+<input type="submit" value="szukaj" id="button" style="visibility: visible">
+    </form>
+<table border="8">
+<thead>
+<tr style="background-color: cadetblue">
+<th>id</th>
+<th>Imię</th>
+<th>Nazwisko</th>
+<th>PESEL</th>
+<th>Kategorie</th>
+<th>Prawo jazdy data</th>
+<th>Świadectwo kwal. data</th>
+<th>Klasy ADR</th>
+<th>ADR data koncowa</th>
+    <th colspan="3"></th>
+</tr>
+</thead>
+
+{% for i in drivers %}
+<tr class="rows" style="background-color: white" >
+    <td><center>{{ i.id }}</center></td>
+    <td><center>{{ i.firstname }}</center></td>
+    <td><center>{{ i.lastname }}</center></td>
+    <td><center>{{ i.PESEL }}</center></td>
+    <td><center>
+        {% if i.prawojazdy.B %}B,{% endif %}
+        {% if i.prawojazdy.CE %}CE, {% endif %}
+        {% if i.prawojazdy.C %}C, {% endif %}
+        {% if i.prawojazdy.BE %}BE, {% endif %}
+        {% if i.prawojazdy.C1 %}C1, {% endif %}
+        </center> </td>
+    <td><center>{{ i.prawojazdy.data_waznosci }}</center></td>
+    <td><center>{{ i.kwalifikacja.data_waznosci}}</center></td>
+    <td><center> {% if i.adr.kat1 %}1,{% endif %}
+    {% if i.adr.kat7 %}7{% endif %}
+    </center></td>
+    <td><center>{{ i.adr.data_waznosci}}</center></td>
+ <td class="functional"><b><center>
+        <a href="/detailsofdriver/{{ i.pk }}"/>
+        <font size="4" color="black"></u>Szczegóły</td>
+
+        <td class="functional"><b><center>
+        <a href="/editdriver/{{ i.pk }}">
+        <font size="4" color="black">Edytuj</td>
+
+    <td class="functional"><b><center>
+        <a href="/deletedriver/{{ i.pk }}" onclick="return confirm('Czy na pewno chcesz usunąć?')">
+            <font size="4" color="red">Usuń</td>
+
+
+</tr>
+{% endfor %}
+</table>
+
+<script src="{% static "js/app.js" %}"></script>
+{% endblock %}
+
+
