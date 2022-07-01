@@ -1,11 +1,19 @@
 from django.db import models
-
+from django.core.exceptions import ValidationError
 # Create your models here.
+
+def PESEL_walidator(value):
+    if len(value) != 11:
+        raise ValidationError('PESEL 11 znaków !')
+
+
+
+
 class DriversModel(models.Model):
-    PESEL = models.CharField(max_length=11, unique=True)
+    PESEL = models.CharField(max_length=11, unique=True, validators=[PESEL_walidator])
     firstname = models.CharField(max_length=32, verbose_name="imie")
     lastname = models.CharField(max_length=32, verbose_name="nazwisko")
-    hiring_date = models.DateField(null=True, verbose_name="data zatrudnienia")
+    
 
 
 #  class PrawoJazdyModel(models.Model):
