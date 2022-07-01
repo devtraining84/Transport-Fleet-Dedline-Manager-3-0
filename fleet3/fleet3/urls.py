@@ -22,7 +22,7 @@ from vehicles.views import AddAdrVehView, AddBtView, AddEuroView, AddFrcView, Ad
 from vehicles.views import BridgeDateView, DeleteVehicleView, SearchVehicleView, BridgeEditView, EditVehicleView, BridgeDelView, DeleteVehicleView
 from vehicles.views import ShowVehicleView, BridgeDetailsVehicleView,  VehicleDetailsView, DedlineVehicleView
 
-from drivers.views import AddDriverView
+from drivers.views import AddDriverView, EditDriverBridgeView, UpdateDriverView
 
 #from drivers.views import *
 
@@ -58,6 +58,8 @@ urlpatterns = [
     re_path(r'^dedlinevehicle/(?P<date_string>\d{4}-\d{2}-\d{2})', DedlineVehicleView.as_view(),name="dedline-veh"),
 #drivers urls:    
     path('adddriver/', AddDriverView.as_view(), name="add-driver"),
+    path('editdriver/<slug:pk>', UpdateDriverView.as_view(), name="edit-driver"),
+    path('editdriver/', EditDriverBridgeView.as_view(), name="bridge-edit-driver"),
 
 ]
 
