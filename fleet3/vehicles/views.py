@@ -1,13 +1,16 @@
 from datetime import date
+import datetime
+#from socketserver import _RequestType
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
+from datetime import date, datetime
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from vehicles.models import VehiclesModel, VehiclePermitsAndDedlinesModel
-from vehicles.forms import ADR_Form, BT_Form, Euro_Form, FRC_Form, SearchForm, BridgeForm, EditVehicleComplexForm, TDT_Form, Tacho_Form, UDT_Form, UK_Form
+from vehicles.forms import ADR_Form, BT_Form, BridgeDateForm, Euro_Form, FRC_Form, SearchForm, BridgeForm, EditVehicleComplexForm, TDT_Form, Tacho_Form, UDT_Form, UK_Form
 
 # Create your views here.
 
@@ -127,7 +130,25 @@ class BridgeDetailsVehicleView(LoginRequiredMixin, View):
                 return redirect(f'/details/{obj[0].id}')
             else:
                 info = 'Brak pojazdu o takim ID'
-                return render(request, 'bridge_del.html', {'form': form, 'info': info})       
+                return render(request, 'bridge_del.html', {'form': form, 'info': info})    
+
+
+
+
+
+class BridgeDateView(LoginRequiredMixin, View):
+    def get(self, request):
+        form = BridgeDateForm()
+        return render(request, 'dedline_bridge.html', {'form': form})
+    def post(self, request):
+        form = BridgeDateForm(request.POST)
+        if form.is_valid():
+            date2 = form.cleaned_data['date2']
+            return redirect(f'/dedlinevehicle/{date2}')
+        else:
+            info = "Nieprawidłowe dane"
+            return render(request, 'dedline_bridge.html', {'form': form, 'info': info})
+
 
 
 
@@ -300,6 +321,7 @@ class AddTdtView(LoginRequiredMixin, View):
 
 
 
+
 class AddEuroView(LoginRequiredMixin, View):
     def get(self, request, id):
         unit = VehiclesModel.objects.get(id=id)
@@ -318,6 +340,25 @@ class AddEuroView(LoginRequiredMixin, View):
         if form.is_valid():
             form.save()
             return redirect(f'/details/{id}')
+
+
+
+
+class DedlineVehicleView(LoginRequiredMixin, View):
+    def get(self, request, date_string):
+        dedline = datetime.strptime(date_string, "%Y-%m-%d")
+        dedline = datetime.date(dedline)
+        vehicles = VehiclesModel.objects.filter(
+            Q(details__badanietechniczne_data_konc__lte=dedline)|
+            Q(details__tachograf_data_konc__lte=dedline)|
+            Q(details__ADR_data_konc__lte=dedline)|
+            Q(details__TDT_data_konc__lte=dedline)|
+            Q(details__UDT_data_konc__lte=dedline)|
+            Q(details__Ubezpieczeniakom_data_konc__lte=dedline)|
+            Q(details__FRC_data_konc__lt=dedline)
+        )
+        note = f"(Pojazdy z końcem terminu). Liczba pojazdów ze zbliżającym się terminem: {len(vehicles)}"
+        return render(request, 'show_all.html', {'vehicles': vehicles, 'note': note})
 
 
 

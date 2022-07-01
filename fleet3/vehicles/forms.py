@@ -1,4 +1,7 @@
 
+from cProfile import label
+from email.policy import default
+from unittest.util import _MAX_LENGTH
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
@@ -22,9 +25,16 @@ class SearchForm(forms.Form):
 
 class BridgeForm(forms.Form):
     id = forms.IntegerField(required=True, label="")
+    
 
 
 
+class BridgeDateForm(forms.Form):
+    date2 = forms.DateField(input_formats=['%Y-%m-%d'], label="")   
+    widgets = {
+        'date2': forms.DateInput(attrs={'class':'datefield', 'type':'date'}),
+    }   
+    
 
 class EditVehicleComplexForm(forms.ModelForm):
     class Meta:

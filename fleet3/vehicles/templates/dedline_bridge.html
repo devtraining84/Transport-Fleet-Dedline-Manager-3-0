@@ -9,19 +9,20 @@
 <form action="" method="post">
 {% csrf_token %}
 Wprowadź datę końca terminów:
-
-    <div class="form">{{ form }}</div>
+    {{form}}
+    <div class="form"></div>
  <font color="red">{{ info }}</font>
     <br>
 <input type="reset" value="Wyczyść">
 <input type="submit" value="    OK    ">
 </form><br>
-<form action="/wykaz_pojazdow/0" method="get"><input type="submit" value="Anuluj"></form>
+<form action="/vehiclelist/0" method="get"><input type="submit" value="Anuluj"></form>
 </div>
     <div class="graphics">
+        
 <img src="{% static "img/smalltrailer2.png" %}" alt="background">
     </div>
-
+    <script src="{% static "js/app3.js" %}"></script>
 {% endblock %}
 
 

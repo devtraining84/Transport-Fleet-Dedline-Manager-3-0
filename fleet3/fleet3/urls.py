@@ -14,11 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 
 from system.views import LoginView, LogoutView, AlphaView, StartView, HelpView, AboutView
 
-from vehicles.views import AddAdrVehView, AddBtView, AddEuroView, AddFrcView, AddTachoView, AddTdtView, AddUdtView, AddUkView, AddVehicleView, DeleteVehicleView, SearchVehicleView, BridgeEditView, EditVehicleView, BridgeDelView, DeleteVehicleView
+from vehicles.views import AddAdrVehView, AddBtView, AddEuroView, AddFrcView, AddTachoView, AddTdtView, AddUdtView, AddUkView, AddVehicleView, DedlineVehicleView
+from vehicles.views import BridgeDateView, DeleteVehicleView, SearchVehicleView, BridgeEditView, EditVehicleView, BridgeDelView, DeleteVehicleView
 from vehicles.views import ShowVehicleView, BridgeDetailsVehicleView,  VehicleDetailsView
 
 
@@ -42,7 +43,7 @@ urlpatterns = [
     path('vehiclelist/<int:select>/', ShowVehicleView.as_view(), name="list-of-vehicle"),
     path('details/', BridgeDetailsVehicleView.as_view(), name="detail"),
     path('details/<int:id>/', VehicleDetailsView.as_view(), name="vehicle-details"),
-    
+    #details for vehicle:
     path('addbt/<int:id>/', AddBtView.as_view(), name="add-bt"),
     path('addtacho/<int:id>', AddTachoView.as_view(), name="add-tacho"),
     path('adduk/<int:id>', AddUkView.as_view(), name="add-uk"),
@@ -51,5 +52,9 @@ urlpatterns = [
     path('addfrc/<int:id>', AddFrcView.as_view(), name="add-frc"),
     path('addtdt/<int:id>', AddTdtView.as_view(), name="add-tdt"),
     path('addeuro/<int:id>', AddEuroView.as_view(), name="add-euro"),
+    path('dedlineveh/', BridgeDateView.as_view(), name="dedline-veh-bridge"),
+    re_path(r'^dedlinevehicle/(?P<date_string>\d{4}-\d{2}-\d{2})', DedlineVehicleView.as_view(),name="dedline-veh"),
+
+
 ]
 
