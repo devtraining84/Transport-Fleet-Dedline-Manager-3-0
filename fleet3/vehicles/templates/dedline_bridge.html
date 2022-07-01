@@ -9,8 +9,9 @@
 <form action="" method="post">
 {% csrf_token %}
 Wprowadź datę końca terminów:
-    {{form}}
-    <div class="form"></div>
+<div class="form">    
+{{form}}
+ 
  <font color="red">{{ info }}</font>
     <br>
 <input type="reset" value="Wyczyść">

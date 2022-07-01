@@ -42,6 +42,10 @@ function TurnOffSmoke(){
 };  
 
 
+
+
+
+
 TurnOnLightRows();
 TurnOffLightRows();
 TurnOnSmoke();
