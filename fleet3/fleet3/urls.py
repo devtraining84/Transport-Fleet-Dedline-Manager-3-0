@@ -18,11 +18,13 @@ from django.urls import path, re_path
 
 from system.views import LoginView, LogoutView, AlphaView, StartView, HelpView, AboutView
 
-from vehicles.views import AddAdrVehView, AddBtView, AddEuroView, AddFrcView, AddTachoView, AddTdtView, AddUdtView, AddUkView, AddVehicleView, DedlineVehicleView
+from vehicles.views import AddAdrVehView, AddBtView, AddEuroView, AddFrcView, AddTachoView, AddTdtView, AddUdtView, AddUkView, AddVehicleView
 from vehicles.views import BridgeDateView, DeleteVehicleView, SearchVehicleView, BridgeEditView, EditVehicleView, BridgeDelView, DeleteVehicleView
-from vehicles.views import ShowVehicleView, BridgeDetailsVehicleView,  VehicleDetailsView
+from vehicles.views import ShowVehicleView, BridgeDetailsVehicleView,  VehicleDetailsView, DedlineVehicleView
 
+from drivers.views import AddDriverView
 
+#from drivers.views import *
 
 urlpatterns = [
 #system urls:    
@@ -54,7 +56,8 @@ urlpatterns = [
     path('addeuro/<int:id>', AddEuroView.as_view(), name="add-euro"),
     path('dedlineveh/', BridgeDateView.as_view(), name="dedline-veh-bridge"),
     re_path(r'^dedlinevehicle/(?P<date_string>\d{4}-\d{2}-\d{2})', DedlineVehicleView.as_view(),name="dedline-veh"),
-
+#drivers urls:    
+    path('adddriver/', AddDriverView.as_view(), name="add-driver"),
 
 ]
 

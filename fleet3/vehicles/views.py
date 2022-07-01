@@ -1,6 +1,4 @@
-from datetime import date
-import datetime
-#from socketserver import _RequestType
+
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from datetime import date, datetime
