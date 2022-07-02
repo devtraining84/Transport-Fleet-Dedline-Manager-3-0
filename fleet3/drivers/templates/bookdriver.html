@@ -8,35 +8,34 @@
     <div class="data">
 <h3>Szczegóły kierowcy:</h3>
 {{ today }}<br>
-Imię:&nbsp;{{ driver.imie }} &nbsp; Nazwisko: {{ driver.nazwisko }}
+Imię:&nbsp;{{ driver.firstname }} &nbsp; Nazwisko: {{ driver.lastname }}
         <br>&nbsp;PESEL:{{ driver.PESEL}},&nbsp;ID w bazie danych: {{ driver.id }}<br>
-Zatrudniony od: {{ driver.data_zatrudnienia }}<br>
-Pracuje przez {{today|timeuntil:driver.data_zatrudnienia}}
+
 <br><a href="/editdriver/{{ driver.pk }}">AKTUALIZUJ </a>
 <hr size="1">
 <h3>Prawo jazdy</h3>
 Posiadane kategorie prawa jazdy:<br><b>
-{% if driver.prawojazdy.B %}B,{% endif %}
-{% if driver.prawojazdy.CE %}CE, {% endif %}
-{% if driver.prawojazdy.C %}C, {% endif %}
-{% if driver.prawojazdy.BE %}BE, {% endif %}
-{% if driver.prawojazdy.C1 %}C1, {% endif %}
+{% if driver.certyficate.B %}B,{% endif %}
+{% if driver.certyficate.CE %}CE, {% endif %}
+{% if driver.certyficate.C %}C, {% endif %}
+{% if driver.certyficate.BE %}BE, {% endif %}
+{% if driver.certyficate.C1 %}C1, {% endif %}
         <br></b>
-Data ważności uprawnień:&nbsp;{{ driver.prawojazdy.data_waznosci }}<br>
-Do końca pozostało:&nbsp; {{ driver.prawojazdy.data_waznosci|timeuntil:today }}<br>
+Data ważności uprawnień:&nbsp;{{ driver.certyficate.driver_licence_enddate }}<br>
+Do końca pozostało:&nbsp; {{ driver.certyficate.driver_licence_enddate|timeuntil:today }}<br>
 <br><a href="/prawojazdyedit/{{ driver.pk }}">AKTUALIZUJ </a>
 <hr size="1">
 <h3> Świadectwo kwalifikacji:</h3>
-Data ważności dokumentu: {{ driver.kwalifikacja.data_waznosci }}<br>
-Do końca pozostało:&nbsp; {{ driver.kwalifikacja.data_waznosci|timeuntil:today }}<br>
+Data ważności dokumentu: {{ driver.certyficate.kwalifikacja_data_konc }}<br>
+Do końca pozostało:&nbsp; {{ driver.certyficate.kwalifikacja_data_konc|timeuntil:today }}<br>
 <br><a href="/kwalifikacjaedit/{{ driver.pk }}">AKTUALIZUJ </a>
 <hr size="1">
 <h3>Pozwolenia ADR</h3>
-Data ważności dokumentu: {{ driver.adr.data_waznosci }}<br>
-Do końca pozostało:&nbsp; {{ driver.adr.data_waznosci|timeuntil:today }}<br>
+Data ważności dokumentu: {{ driver.certyficate.ADR_data_konc }}<br>
+Do końca pozostało:&nbsp; {{ driver.certyficate.ADR_data_konc |timeuntil:today }}<br>
 Klasy ADR: &nbsp;<a href="/adrdriveredit/{{ driver.pk }}">AKTUALIZUJ </a><br><ul>
-        {% if driver.adr.kat1 %}<li>Klasa 1 - materiały niebezpieczne</li><br>{% endif %}
-        {% if driver.adr.kat7 %}<li>Klasa 7 - cysterny</li>{% endif %}<br></ul>
+        {% if driver.certyficate.ADR_cat1 %}<li>Klasa 1 - materiały niebezpieczne</li><br>{% endif %}
+        {% if driver.certyficate.ADR_cat7 %}<li>Klasa 7 - cysterny</li>{% endif %}<br></ul>
 
 <hr size="1">
 
