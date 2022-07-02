@@ -3,9 +3,10 @@ from django.views import View
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import Q
 
 from drivers.models import DriversModel
-from vehicles.forms import BridgeForm
+from vehicles.forms import BridgeForm, SearchForm
 
 
 
@@ -15,7 +16,7 @@ class AddDriverView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     fields = '__all__'
     template_name = 'add_driver.html'
     success_url = '/adddriver/'
-    success_message ='Dodano kierowce do bazy danych'
+    success_message = 'Dodano kierowce do bazy danych'
 
 
 
@@ -78,3 +79,22 @@ class DeleteDriverBridgeView(LoginRequiredMixin, View):
             else:
                 info = "Brak kierowcy o podanym ID"
                 return render(request, 'bridge_del_driver.html', {'form': form, 'info':info})
+
+
+
+
+class SearchPersonView(LoginRequiredMixin, View):
+    def get(self, request):
+        form = SearchForm(request.GET)
+        form.is_valid()
+        text = form.cleaned_data.get('text', '')
+        result = DriversModel.objects.filter(
+            Q(firstname__icontains=text)|
+            Q(lastname__icontains=text))
+        note = f"wyszukano {len(result)}"
+        ctx ={
+            'form': form,
+            'drivers': result,
+             'note': note,
+             }
+        return render(request, 'show_drivers.html', ctx)               
