@@ -22,7 +22,8 @@ from vehicles.views import AddAdrVehView, AddBtView, AddEuroView, AddFrcView, Ad
 from vehicles.views import BridgeDateView, DeleteVehicleView, SearchVehicleView, BridgeEditView, EditVehicleView, BridgeDelView, DeleteVehicleView
 from vehicles.views import ShowVehicleView, BridgeDetailsVehicleView,  VehicleDetailsView, DedlineVehicleView
 
-from drivers.views import AddDriverView, DeleteDriverBridgeView, DeleteDriverView, EditDriverBridgeView, SearchPersonView, ShowDriversView, UpdateDriverView
+from drivers.views import AddDriverView, BookOfDriverView, DeleteDriverBridgeView, DeleteDriverView, EditDriverBridgeView, SearchPersonView
+from drivers.views import ShowDriversView, UpdateDriverView
 
 #from drivers.views import *
 
@@ -64,5 +65,7 @@ urlpatterns = [
     path('deletedriver/<int:id>', DeleteDriverView.as_view(), name="delete-driver"),
     path('deletedriver/', DeleteDriverBridgeView.as_view(), name="del-bridge-driver"),
     path('searchperson/', SearchPersonView.as_view(), name="search-person"),
+    path('detailsofdriver/<int:id>', BookOfDriverView.as_view(), name="driver-detail"),
+
 ]
 

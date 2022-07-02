@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<head>
+<link rel="stylesheet" type="text/css" href="{% static "css/style_details.css" %}">
+</head>
+
+    <div class="data">
+<h3>Szczegóły kierowcy:</h3>
+{{ today }}<br>
+Imię:&nbsp;{{ driver.imie }} &nbsp; Nazwisko: {{ driver.nazwisko }}
+        <br>&nbsp;PESEL:{{ driver.PESEL}},&nbsp;ID w bazie danych: {{ driver.id }}<br>
+Zatrudniony od: {{ driver.data_zatrudnienia }}<br>
+Pracuje przez {{today|timeuntil:driver.data_zatrudnienia}}
+<br><a href="/editdriver/{{ driver.pk }}">AKTUALIZUJ </a>
+<hr size="1">
+<h3>Prawo jazdy</h3>
+Posiadane kategorie prawa jazdy:<br><b>
+{% if driver.prawojazdy.B %}B,{% endif %}
+{% if driver.prawojazdy.CE %}CE, {% endif %}
+{% if driver.prawojazdy.C %}C, {% endif %}
+{% if driver.prawojazdy.BE %}BE, {% endif %}
+{% if driver.prawojazdy.C1 %}C1, {% endif %}
+        <br></b>
+Data ważności uprawnień:&nbsp;{{ driver.prawojazdy.data_waznosci }}<br>
+Do końca pozostało:&nbsp; {{ driver.prawojazdy.data_waznosci|timeuntil:today }}<br>
+<br><a href="/prawojazdyedit/{{ driver.pk }}">AKTUALIZUJ </a>
+<hr size="1">
+<h3> Świadectwo kwalifikacji:</h3>
+Data ważności dokumentu: {{ driver.kwalifikacja.data_waznosci }}<br>
+Do końca pozostało:&nbsp; {{ driver.kwalifikacja.data_waznosci|timeuntil:today }}<br>
+<br><a href="/kwalifikacjaedit/{{ driver.pk }}">AKTUALIZUJ </a>
+<hr size="1">
+<h3>Pozwolenia ADR</h3>
+Data ważności dokumentu: {{ driver.adr.data_waznosci }}<br>
+Do końca pozostało:&nbsp; {{ driver.adr.data_waznosci|timeuntil:today }}<br>
+Klasy ADR: &nbsp;<a href="/adrdriveredit/{{ driver.pk }}">AKTUALIZUJ </a><br><ul>
+        {% if driver.adr.kat1 %}<li>Klasa 1 - materiały niebezpieczne</li><br>{% endif %}
+        {% if driver.adr.kat7 %}<li>Klasa 7 - cysterny</li>{% endif %}<br></ul>
+
+<hr size="1">
+
+</div>
+<div class="graphics">
+<img src="{% static "img/driverchecklist.png" %}" alt="background">
+
+    </div>
+{% endblock %}
+
+

@@ -1,3 +1,4 @@
+from datetime import date
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView
@@ -88,13 +89,20 @@ class SearchPersonView(LoginRequiredMixin, View):
         form = SearchForm(request.GET)
         form.is_valid()
         text = form.cleaned_data.get('text', '')
-        result = DriversModel.objects.filter(
-            Q(firstname__icontains=text)|
-            Q(lastname__icontains=text))
+        result = DriversModel.objects.filter(Q(firstname__icontains=text)|Q(lastname__icontains=text))
         note = f"wyszukano {len(result)}"
-        ctx ={
-            'form': form,
+        ctx ={'form': form,
             'drivers': result,
-             'note': note,
-             }
-        return render(request, 'show_drivers.html', ctx)               
+             'note': note}
+        return render(request, 'show_drivers.html', ctx)         
+
+
+
+
+
+class BookOfDriverView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        driver = DriversModel.objects.get(id=id)
+        today = date.today()
+        return render(request, 'bookdriver.html', {'driver': driver,
+                                                   'today': today})

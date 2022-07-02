@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <head>
+ <link rel="stylesheet" type="text/css" href="{% static "css/style_details.css" %}">
+ </head>
+<div class = "data">
+
+<form action="" method="post">
+{% csrf_token %}
+Wprowadź ID kierowcy:
+
+    <div class="form">{{ form }}</div>
+    <font color = "red" >{{ info }}</font>
+    <br>
+<input type="reset" value="Wyczyść">
+<input type="submit" value="    OK    ">
+</form><br>
+<form action="/wykaz_pojazdow/0" method="get"><input type="submit" value="Anuluj"></form>
+</div>
+  <div class="graphics">
+<img src="{% static "img/smalltrailer2.png" %}" alt="background">
+    </div>
+
+{% endblock %}
+
+
+

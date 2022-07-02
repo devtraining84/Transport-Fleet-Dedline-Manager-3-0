@@ -16,27 +16,25 @@ class DriversModel(models.Model):
     
 
 
-#  class PrawoJazdyModel(models.Model):
-#     driver = models.OneToOneField(DriversModel, on_delete=models.CASCADE, primary_key=True, related_name="prawojazdy")
-#     data_waznosci = models.DateField()
-#     B = models.BooleanField(default=True)
-#     CE = models.BooleanField(default=True)
-#     C = models.BooleanField(default=True)
-#     BE = models.BooleanField(default=False)
-#     C1 = models.BooleanField(default=False)
+
+class DriverCertificatesModel(models.Model):
+    driver = models.OneToOneField(DriversModel, on_delete=models.CASCADE, primary_key=True, related_name="certyficate")
+
+    driver_licence_enddate = models.DateField(verbose_name="Prawo Jazdy data koncowa")
+    B = models.BooleanField(default=True)
+    CE = models.BooleanField(default=True)
+    C = models.BooleanField(default=True)
+    BE = models.BooleanField(default=False)
+    C1 = models.BooleanField(default=False)
+    kwalifikacja_data_konc = models.DateField(verbose_name="Swiadectwo kwal. data koncowa")
+    ADR_data_konc = models.DateField(verbose_name="ADR data koncowa")
+    ADR_cat1 = models.BooleanField(default=False, verbose_name="kat 1")
+    ADR_cat7 = models.BooleanField(default=False, verbose_name="kat 7")
 
 
 
 
-# class Kwalifikacja(models.Model):
-#     kierowca = models.OneToOneField(Kierowcy, on_delete=models.CASCADE, primary_key=True, related_name="kwalifikacja")
-#     data_waznosci = models.DateField()
 
-# class ADRdriver(models.Model):
-#     kierowca = models.OneToOneField(Kierowcy, on_delete=models.CASCADE, primary_key=True, related_name="adr")
-#     data_waznosci = models.DateField()
-#     kat1 = models.BooleanField(default=False)
-#     kat7 = models.BooleanField(default=False)
 
 
    
