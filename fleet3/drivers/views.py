@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Q
 
+from drivers.forms import BookOfDriverForm
 from drivers.models import DriverCertificatesModel, DriversModel
 from vehicles.forms import BridgeForm, SearchForm
 
@@ -110,33 +111,24 @@ class BookOfDriverView(LoginRequiredMixin, View):
 
 
 
-# class BookOfDriverActiveFormView(LoginRequiredMixin, UpdateView):
-#     model = DriverCertificatesModel
-#     fields = '__all__'
-#     template_name = 'bookdriverform.html'
-#     success_url = '/drivers/'
-
-
-
-
 class BookOfDriverEditView(LoginRequiredMixin, View):
     def get(self, request, id):
-        unit = DriverCertificatesModel.objects.get(id=id)
-        if DriverCertificatesModel.objects.filter(driver=unit).exists():
-            bt_unit = DriverCertificatesModel.objects.get(driver=unit)
-            form = BookOfDriverForm(instance=bt_unit)
+        driver = DriversModel.objects.get(id=id)
+        today = date.today()
+        if DriverCertificatesModel.objects.filter(driver=driver).exists():
+            unit = DriverCertificatesModel.objects.get(driver=driver)
+            form = BookOfDriverForm(instance=unit)
         else:
             form = BookOfDriverForm()
-        ctx = {'unit': unit, 'form': form}
-        return render(request, 'add_tacho.html', ctx)
-#     def post(self,request, id):
-#         unit = VehiclesModel.objects.get(id=id)
-#         object, created = VehiclePermitsAndDedlinesModel.objects.get_or_create(pojazd=unit)
-#         form = Tacho_Form(request.POST, instance=object)
-#         if form.is_valid():
-#                 form.save()
-#                 return redirect(f'/details/{id}'),
-
+        ctx = {'form': form, 'driver': driver, 'today': today}
+        return render(request, 'bookdriverform.html', ctx)
+    def post(self,request, id):
+        driver = DriversModel.objects.get(id=id)
+        object, created = DriverCertificatesModel.objects.get_or_create(driver=driver)
+        form = BookOfDriverForm(request.POST, instance=object)
+        if form.is_valid():
+                form.save()
+                return redirect(f'/detailsofdriver/{id}'),
 
 
 

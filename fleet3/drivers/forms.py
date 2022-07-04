@@ -3,7 +3,7 @@ from drivers.models import DriverCertificatesModel
 
 
 
-class EditVehicleComplexForm(forms.ModelForm):
+class BookOfDriverForm(forms.ModelForm):
     class Meta:
         model = DriverCertificatesModel
         fields ='__all__'
