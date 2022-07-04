@@ -8,7 +8,7 @@ from django.views import View
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from vehicles.models import VehiclesModel, VehiclePermitsAndDedlinesModel
-from vehicles.forms import ADR_Form, BT_Form, BridgeDateForm, Euro_Form, FRC_Form, SearchForm, BridgeForm, EditVehicleComplexForm, TDT_Form, Tacho_Form, UDT_Form, UK_Form
+from vehicles.forms import ADR_Form, BT_Form, BridgeDateForm, Euro_Form, FRC_Form, SearchForm, BridgeForm, TDT_Form, Tacho_Form, UDT_Form, UK_Form
 
 # Create your views here.
 
@@ -156,16 +156,6 @@ class VehicleDetailsView(LoginRequiredMixin, View):
         unit = VehiclesModel.objects.filter(id=id)
         today = date.today()
         return render(request, 'detail.html', {'unit': unit,'today': today})
-
-
-
-
-class VehicleDetailsFormView(LoginRequiredMixin, View):
-    def get(self, request, id):
-        unit = VehiclesModel.objects.filter(id=id)
-        today = date.today()
-        form = EditVehicleComplexForm
-        return render(request, 'detail.html', {'unit': unit,'today': today, 'form': form})        
 
 
 

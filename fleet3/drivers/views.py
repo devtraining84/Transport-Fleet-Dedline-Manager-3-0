@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Q
 
-from drivers.models import DriversModel
+from drivers.models import DriverCertificatesModel, DriversModel
 from vehicles.forms import BridgeForm, SearchForm
 
 
@@ -106,3 +106,52 @@ class BookOfDriverView(LoginRequiredMixin, View):
         today = date.today()
         return render(request, 'bookdriver.html', {'driver': driver,
                                                    'today': today})
+
+
+
+
+# class BookOfDriverActiveFormView(LoginRequiredMixin, UpdateView):
+#     model = DriverCertificatesModel
+#     fields = '__all__'
+#     template_name = 'bookdriverform.html'
+#     success_url = '/drivers/'
+
+
+
+
+class BookOfDriverEditView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        unit = DriverCertificatesModel.objects.get(id=id)
+        if DriverCertificatesModel.objects.filter(driver=unit).exists():
+            bt_unit = DriverCertificatesModel.objects.get(driver=unit)
+            form = BookOfDriverForm(instance=bt_unit)
+        else:
+            form = BookOfDriverForm()
+        ctx = {'unit': unit, 'form': form}
+        return render(request, 'add_tacho.html', ctx)
+#     def post(self,request, id):
+#         unit = VehiclesModel.objects.get(id=id)
+#         object, created = VehiclePermitsAndDedlinesModel.objects.get_or_create(pojazd=unit)
+#         form = Tacho_Form(request.POST, instance=object)
+#         if form.is_valid():
+#                 form.save()
+#                 return redirect(f'/details/{id}'),
+
+
+
+
+
+class DetailsDriverBridgeView(LoginRequiredMixin, View):
+    def get(self, request):
+        form = BridgeForm()
+        return render(request, 'bridge_details_driver.html', {'form': form})
+    def post(self, request):
+        form = BridgeForm(request.POST)
+        if form.is_valid():
+            if DriversModel.objects.filter(id=form.cleaned_data['id']).exists():
+                object = DriversModel.objects.get(id=form.cleaned_data['id'])
+                return redirect(f'/detailsofdriver/{object.id}')
+            else:
+                info = 'Brak kierowcy o takim ID'
+                return render(request, 'bridge_details_driver.html', {'form': form, 'info':info})
+

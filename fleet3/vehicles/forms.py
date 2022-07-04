@@ -36,13 +36,6 @@ class BridgeDateForm(forms.Form):
     }   
     
 
-class EditVehicleComplexForm(forms.ModelForm):
-    class Meta:
-        model = VehiclePermitsAndDedlinesModel
-        fields ='__all__'
-
-
-
 
 
 class BT_Form(forms.ModelForm):
