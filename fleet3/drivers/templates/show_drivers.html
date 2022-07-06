@@ -38,12 +38,12 @@
         {% if i.certyficate.BE %}BE, {% endif %}
         {% if i.certyficate.C1 %}C1, {% endif %}
         </center> </td>
-    <td><center>{{ i.certyficate.driver_licence_enddate }}</center></td>
-    <td><center>{{ i.certyficate.kwalifikacja_data_konc}}</center></td>
+    <td><center>{% if i.certyficate.driver_licence_enddate %}{{ i.certyficate.driver_licence_enddate }} {% endif %}</center></td>
+    <td><center>{% if i.certyficate.kwalifikacja_data_konc %}{{ i.certyficate.kwalifikacja_data_konc}} {% endif %}</center></td>
     <td><center> {% if i.certyficate.ADR_cat1 %}1,{% endif %}
     {% if i.certyficate.ADR_cat7 %}7{% endif %}
     </center></td>
-    <td><center>{{ i.certyficate.ADR_data_konc }}</center></td>
+    <td><center>{% if i.certyficate.ADR_data_konc  %}{{ i.certyficate.ADR_data_konc }} {% endif %}</center></td>
  <td class="functional"><b><center>
         <a href="/detailsofdriver/{{ i.pk }}"/>
         <font size="4" color="black"></u>Szczegóły</td>

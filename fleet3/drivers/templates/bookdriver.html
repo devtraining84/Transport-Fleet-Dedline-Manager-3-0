@@ -21,17 +21,17 @@ Posiadane kategorie prawa jazdy:<br><b>
 {% if driver.certyficate.BE %}BE, {% endif %}
 {% if driver.certyficate.C1 %}C1, {% endif %}
         <br></b>
-Data ważności uprawnień:&nbsp;{{ driver.certyficate.driver_licence_enddate }}<br>
+Data ważności uprawnień:&nbsp;{% if driver.certyficate.driver_licence_enddate %} {{ driver.certyficate.driver_licence_enddate }}{% endif %}<br>
 Do końca pozostało:&nbsp; {{ driver.certyficate.driver_licence_enddate|timeuntil:today }}<br>
 <br><a href="/detailsofdriver/{{ driver.pk }}/activform">AKTUALIZUJ </a>
 <hr size="1">
 <h3> Świadectwo kwalifikacji:</h3>
-Data ważności dokumentu: {{ driver.certyficate.kwalifikacja_data_konc }}<br>
+Data ważności dokumentu:{% if driver.certyficate.kwalifikacja_data_konc  %} {{ driver.certyficate.kwalifikacja_data_konc }}  {% endif %}<br>
 Do końca pozostało:&nbsp; {{ driver.certyficate.kwalifikacja_data_konc|timeuntil:today }}<br>
 <br><a href="/detailsofdriver/{{ driver.pk }}/activform">AKTUALIZUJ </a>
 <hr size="1">
 <h3>Pozwolenia ADR</h3>
-Data ważności dokumentu: {{ driver.certyficate.ADR_data_konc }}<br>
+Data ważności dokumentu: {% if driver.certyficate.ADR_data_konc  %} {{ driver.certyficate.ADR_data_konc }}  {% endif %}<br>
 Do końca pozostało:&nbsp; {{ driver.certyficate.ADR_data_konc |timeuntil:today }}<br>
 Klasy ADR: &nbsp;<a href="/detailsofdriver/{{ driver.pk }}/activform">AKTUALIZUJ </a><br><ul>
         {% if driver.certyficate.ADR_cat1 %}<li>Klasa 1 - materiały niebezpieczne</li><br>{% endif %}

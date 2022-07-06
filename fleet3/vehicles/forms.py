@@ -1,5 +1,6 @@
 
 from cProfile import label
+from datetime import date
 from email.policy import default
 from unittest.util import _MAX_LENGTH
 from django import forms
@@ -30,9 +31,9 @@ class BridgeForm(forms.Form):
 
 
 class BridgeDateForm(forms.Form):
-    date2 = forms.DateField(input_formats=['%Y-%m-%d'], label="")   
+    date2 = forms.DateField(label="")   
     widgets = {
-        'date2': forms.DateInput(attrs={'class':'datefield', 'type':'date'}),
+        'date2': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
     }   
     
 
@@ -43,13 +44,8 @@ class BT_Form(forms.ModelForm):
         model = VehiclePermitsAndDedlinesModel
         fields = ['badanietechniczne_instytucja', 'badanietechniczne_wymagane', 'badanietechniczne_data_konc']
         widgets = {
-        'data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
+        'badanietechniczne_data_konc': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
     }   
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['badanietechniczne_instytucja'].widget.attrs.update(size='50')
-        self.fields['badanietechniczne_data_konc'].required = False
-        self.fields['badanietechniczne_wymagane'].required = False
 
 
 
