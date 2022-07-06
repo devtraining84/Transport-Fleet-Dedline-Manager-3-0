@@ -131,7 +131,6 @@ class BookOfDriverEditView(LoginRequiredMixin, View):
     def get(self, request, id):
         driver_ = DriversModel.objects.get(id=id)
         today = date.today()
-        form = BookOfDriverForm()
         if DriverCertificatesModel.objects.filter(driver=driver_).exists():
             unit = DriverCertificatesModel.objects.get(driver=driver_)
             form = BookOfDriverForm(instance=unit)
