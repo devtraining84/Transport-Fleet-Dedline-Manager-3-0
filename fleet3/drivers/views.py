@@ -1,5 +1,4 @@
 from datetime import date
-from urllib import request
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView
