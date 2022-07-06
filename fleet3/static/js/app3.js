@@ -7,8 +7,6 @@ var detail = document.querySelectorAll(".detail");
 
 
 
-
-
 function TurnOnLightRows(){
     for(var i = 0; i < rows.length; i++) {
         rows[i].addEventListener("mouseover", function(event) {
@@ -40,7 +38,6 @@ function TurnOffSmoke(){
         });
         }
 };  
-
 
 
 

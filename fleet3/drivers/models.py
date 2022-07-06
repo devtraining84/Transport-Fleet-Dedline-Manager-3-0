@@ -1,5 +1,7 @@
+#from dataclasses import field
 from django.db import models
 from django.core.exceptions import ValidationError
+from pkg_resources import require
 # Create your models here.
 
 def PESEL_walidator(value):
@@ -20,18 +22,16 @@ class DriversModel(models.Model):
 class DriverCertificatesModel(models.Model):
     driver = models.OneToOneField(DriversModel, on_delete=models.CASCADE, primary_key=True, related_name="certyficate")
 
-    driver_licence_enddate = models.DateField(verbose_name="Prawo Jazdy data koncowa")
+    driver_licence_enddate = models.DateField(verbose_name="Prawo Jazdy data koncowa", null=True, blank=True)
     B = models.BooleanField(default=True)
     CE = models.BooleanField(default=True)
     C = models.BooleanField(default=True)
     BE = models.BooleanField(default=False)
     C1 = models.BooleanField(default=False)
-    kwalifikacja_data_konc = models.DateField(verbose_name="Swiadectwo kwal. data koncowa")
-    ADR_data_konc = models.DateField(verbose_name="ADR data koncowa")
+    kwalifikacja_data_konc = models.DateField(verbose_name="Swiadectwo kwal. data koncowa", null=True, blank=True)
+    ADR_data_konc = models.DateField(verbose_name="ADR data koncowa", null=True, blank=True)
     ADR_cat1 = models.BooleanField(default=False, verbose_name="kat 1")
     ADR_cat7 = models.BooleanField(default=False, verbose_name="kat 7")
-
-
 
 
 

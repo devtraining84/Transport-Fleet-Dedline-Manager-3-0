@@ -65,7 +65,7 @@ class BridgeEditView(LoginRequiredMixin, View):
 
 class EditVehicleView(LoginRequiredMixin, UpdateView):
     model = VehiclesModel
-    fields = ['marka','model','nr_rej','rok_prod']
+    fields = ('marka','model','nr_rej','rok_prod')
     template_name = 'edit_vehicle.html'
     success_url = '/vehiclelist/0/'
 
@@ -176,8 +176,8 @@ class AddBtView(LoginRequiredMixin, View):
         object, created = VehiclePermitsAndDedlinesModel.objects.update_or_create(pojazd=unit)
         form = BT_Form(request.POST, instance=object)
         if form.is_valid():
-                form.save()
-                return redirect(f'/details/{id}')
+            form.save()
+            return redirect(f'/details/{id}')
 
 
 
@@ -198,8 +198,8 @@ class AddTachoView(LoginRequiredMixin, View):
         object, created = VehiclePermitsAndDedlinesModel.objects.get_or_create(pojazd=unit)
         form = Tacho_Form(request.POST, instance=object)
         if form.is_valid():
-                form.save()
-                return redirect(f'/details/{id}')
+            form.save()
+            return redirect(f'/details/{id}')
 
 
         
@@ -299,7 +299,6 @@ class AddTdtView(LoginRequiredMixin, View):
         return render(request, 'addtdt.html', ctx)
     def post(self,request, id):
         unit = VehiclesModel.objects.get(id=id)
-        form = TDT_Form(request.POST)
         object, created = VehiclePermitsAndDedlinesModel.objects.get_or_create(pojazd=unit)
         form = TDT_Form(request.POST, instance=object)
         if form.is_valid():
@@ -322,7 +321,6 @@ class AddEuroView(LoginRequiredMixin, View):
         return render(request, 'addeuro.html', ctx)
     def post(self,request, id):
         unit = VehiclesModel.objects.get(id=id)
-        form = Euro_Form(request.POST)
         object, created = VehiclePermitsAndDedlinesModel.objects.get_or_create(pojazd=unit)
         form = Euro_Form(request.POST, instance=object)
         if form.is_valid():

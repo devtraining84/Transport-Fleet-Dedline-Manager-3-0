@@ -24,8 +24,8 @@ C &nbsp;{{form.C}} &nbsp;
 BE &nbsp;{{form.BE}} &nbsp;
 C1 &nbsp;{{form.C1}} &nbsp;
        <br></b>
-Data ważności uprawnień:&nbsp;{{ form.driver_licence_enddate }}<br>
-Do końca pozostało:&nbsp; {{ driver.certyficate.driver_licence_enddate|timeuntil:today }}<br>
+Data ważności uprawnień:&nbsp;{{form.driver_licence_enddate}}<br>
+Do końca pozostało:&nbsp; {{driver.certyficate.driver_licence_enddate|timeuntil:today}}<br>
 <br><input type="submit" value="Aktualizuj">
 
 
@@ -42,7 +42,7 @@ Do końca pozostało:&nbsp; {{ driver.certyficate.kwalifikacja_data_konc|timeunt
 
 <hr size="1">
 <h3>Pozwolenia ADR</h3>
-Data ważności dokumentu: {{ form.ADR_data_konc }}<br>
+Data ważności dokumentu: {{form.ADR_data_konc}}<br>
 Do końca pozostało:&nbsp; {{ driver.certyficate.ADR_data_konc |timeuntil:today }}<br>
 Klasy ADR: &nbsp<ul>
         <li>Klasa 1 - materiały niebezpieczne &nbsp;{{form.ADR_cat1}}</li><br>

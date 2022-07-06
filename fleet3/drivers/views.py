@@ -1,4 +1,5 @@
 from datetime import date
+from urllib import request
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView
@@ -95,40 +96,7 @@ class SearchPersonView(LoginRequiredMixin, View):
         ctx ={'form': form,
             'drivers': result,
              'note': note}
-        return render(request, 'show_drivers.html', ctx)         
-
-
-
-
-
-class BookOfDriverView(LoginRequiredMixin, View):
-    def get(self, request, id):
-        driver = DriversModel.objects.get(id=id)
-        today = date.today()
-        return render(request, 'bookdriver.html', {'driver': driver,
-                                                   'today': today})
-
-
-
-
-class BookOfDriverEditView(LoginRequiredMixin, View):
-    def get(self, request, id):
-        driver = DriversModel.objects.get(id=id)
-        today = date.today()
-        if DriverCertificatesModel.objects.filter(driver=driver).exists():
-            unit = DriverCertificatesModel.objects.get(driver=driver)
-            form = BookOfDriverForm(instance=unit)
-        else:
-            form = BookOfDriverForm()
-        ctx = {'form': form, 'driver': driver, 'today': today}
-        return render(request, 'bookdriverform.html', ctx)
-    def post(self,request, id):
-        driver = DriversModel.objects.get(id=id)
-        object, created = DriverCertificatesModel.objects.get_or_create(driver=driver)
-        form = BookOfDriverForm(request.POST, instance=object)
-        if form.is_valid():
-                form.save()
-                return redirect(f'/detailsofdriver/{id}'),
+        return render(request, 'show_drivers.html', ctx)  
 
 
 
@@ -146,4 +114,37 @@ class DetailsDriverBridgeView(LoginRequiredMixin, View):
             else:
                 info = 'Brak kierowcy o takim ID'
                 return render(request, 'bridge_details_driver.html', {'form': form, 'info':info})
+
+
+       
+
+class BookOfDriverView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        driver = DriversModel.objects.get(id=id)
+        today = date.today()
+        return render(request, 'bookdriver.html', {'driver': driver,
+                                                   'today': today})
+
+
+
+
+class BookOfDriverEditView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        driver_ = DriversModel.objects.get(id=id)
+        today = date.today()
+        form = BookOfDriverForm()
+        if DriverCertificatesModel.objects.filter(driver=driver_).exists():
+            unit = DriverCertificatesModel.objects.get(driver=driver_)
+            form = BookOfDriverForm(instance=unit)
+        else:
+            form = BookOfDriverForm()
+        ctx = {'form': form, 'driver': driver_, 'today': today}
+        return render(request, 'bookdriverform.html', ctx)
+    def post(self,request, id):
+        unit = DriversModel.objects.get(id=id)
+        object, created = DriverCertificatesModel.objects.get_or_create(driver=unit)
+        form = BookOfDriverForm(request.POST, instance=object)
+        if form.is_valid():
+            form.save()
+            return redirect(f'/detailsofdriver/{id}')
 
