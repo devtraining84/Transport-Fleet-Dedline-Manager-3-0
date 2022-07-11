@@ -13,6 +13,7 @@ function DateControl(){
     id_date2.type="date";
     var id_bt_date = document.getElementById('id_badanietechniczne_data_konc');
     id_bt_date.type="date";
+    
   //  <input type="text" name="badanietechniczne_data_konc" value="2022-09-23" required="" id="id_badanietechniczne_data_konc">
     
    console.log(id_bt_date);

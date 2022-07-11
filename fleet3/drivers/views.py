@@ -8,7 +8,7 @@ from django.db.models import Q
 
 from drivers.forms import BookOfDriverForm
 from drivers.models import DriverCertificatesModel, DriversModel
-from vehicles.forms import BridgeForm, SearchForm
+from vehicles.forms import BridgeDateForm, BridgeForm, SearchForm
 
 
 
@@ -145,4 +145,21 @@ class BookOfDriverEditView(LoginRequiredMixin, View):
         if form.is_valid():
             form.save()
             return redirect(f'/detailsofdriver/{id}')
+
+
+
+
+
+class BridgeDatePersonView(LoginRequiredMixin, View):
+    def get(self, request):
+        form = BridgeDateForm()
+        return render(request, 'dedline_bridge.html', {'form': form})
+    def post(self, request):
+        form = BridgeDateForm(request.POST)
+        if form.is_valid():
+            date2 = form.cleaned_data['date2']
+            return redirect(f'/dedlineperson/{date2}')
+        else:
+            info = "Nieprawidłowe dane"
+            return render(request, 'dedline_bridge.html', {'form': form, 'info': info})
 
