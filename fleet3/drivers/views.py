@@ -1,5 +1,4 @@
-from datetime import date
-import datetime
+from datetime import date, datetime
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView
@@ -172,9 +171,9 @@ class DedlinePersonView(LoginRequiredMixin, View):
         dedline = datetime.strptime(date_string, "%Y-%m-%d")
         dedline = datetime.date(dedline)
         drivers = DriversModel.objects.filter(
-                Q(driver_licence_enddate__lte=dedline)|
-                Q(kwalifikacja_data_konc__lte=dedline)|
-                Q(ADR_data_konc__lte=dedline)
+                Q(certyficate__driver_licence_enddate__lte=dedline)|
+                Q(certyficate__kwalifikacja_data_konc__lte=dedline)|
+                Q(certyficate__ADR_data_konc__lte=dedline)
                 )
         note = f"Kierowców z granicznymi terminami {len(drivers)}"
         return render(request, 'show_drivers.html', {'drivers': drivers, 'note': note})
