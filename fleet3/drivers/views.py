@@ -1,4 +1,5 @@
 from datetime import date
+import datetime
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView
@@ -163,3 +164,17 @@ class BridgeDatePersonView(LoginRequiredMixin, View):
             info = "Nieprawidłowe dane"
             return render(request, 'dedline_bridge.html', {'form': form, 'info': info})
 
+
+
+
+class DedlinePersonView(LoginRequiredMixin, View):
+    def get(self, request, date_string):
+        dedline = datetime.strptime(date_string, "%Y-%m-%d")
+        dedline = datetime.date(dedline)
+        drivers = DriversModel.objects.filter(
+                Q(driver_licence_enddate__lte=dedline)|
+                Q(kwalifikacja_data_konc__lte=dedline)|
+                Q(ADR_data_konc__lte=dedline)
+                )
+        note = f"Kierowców z granicznymi terminami {len(drivers)}"
+        return render(request, 'show_drivers.html', {'drivers': drivers, 'note': note})
