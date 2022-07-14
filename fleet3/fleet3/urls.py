@@ -22,7 +22,7 @@ from vehicles.views import AddAdrVehView, AddBtView, AddEuroView, AddFrcView, Ad
 from vehicles.views import BridgeDateView, DeleteVehicleView, SearchVehicleView, BridgeEditView, EditVehicleView, BridgeDelView, DeleteVehicleView
 from vehicles.views import ShowVehicleView, BridgeDetailsVehicleView,  VehicleDetailsView, DedlineVehicleView
 
-from drivers.views import BookOfDriverEditView, BridgeDatePersonView, EditDriverBridgeView, SearchPersonView
+from drivers.views import BookOfDriverEditView, BridgeDatePersonView, DedlinePersonView, EditDriverBridgeView, SearchPersonView
 from drivers.views import AddDriverView, BookOfDriverView, DeleteDriverBridgeView, DeleteDriverView, DetailsDriverBridgeView
 from drivers.views import ShowDriversView, UpdateDriverView
 
@@ -70,5 +70,6 @@ urlpatterns = [
     path('detailsofdriver/', DetailsDriverBridgeView.as_view(), name="detail-driver-bridge"),
     path('detailsofdriver/<int:id>/activform', BookOfDriverEditView.as_view(), name="driver-detail"),
     path('dedlineperson/', BridgeDatePersonView.as_view(), name="dedline-person-bridge"),
+    re_path(r'^dedlineperson/(?P<date_string>\d{4}-\d{2}-\d{2})', DedlinePersonView.as_view(), name="dedline-person"),
 ]
 
